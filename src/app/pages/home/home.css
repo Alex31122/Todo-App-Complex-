@@ -1,0 +1,20 @@
+.left{
+    border: 2px solid red;
+    width: 33%;
+    padding: 2%;
+}
+.center{
+    border: 2px solid blue;
+    width: 33%;
+    padding: 2%;
+}
+.right{
+    border: 2px solid green;
+    width: 33%;
+    padding: 2%;
+    padding-top: 5%;
+}
+
+.sections{
+    display: flex;
+}
