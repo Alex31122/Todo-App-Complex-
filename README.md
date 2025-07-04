@@ -2,6 +2,8 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 
+This project is to do a todo-app with more complex feautures like due date and tags of todos.
+
 ## Development server
 
 To start a local development server, run:
