@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class AllTasks {
   todoList: ToDo[] = [];
-
+  selection = output<string>();
   constructor(){
     this.setTodoList();
   }
@@ -30,4 +30,7 @@ export class AllTasks {
     localStorage.setItem('todoList', TodoList);
   }
 
+  sendSelectionToHome(){
+    this.selection.emit("add_todo");
+  }
 }
