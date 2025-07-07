@@ -1,12 +1,16 @@
 <p>home works!</p>
 <div class="sections">
     <div class="left">
-        Left Section
+      <app-left-section></app-left-section>
     </div>
     <div class="center">
         <app-all-tasks></app-all-tasks>
     </div>
     <div class="right">
-        <app-add-todo></app-add-todo>
+       @if (!true) {
+        <app-add-list></app-add-list>
+       }@else {
+         <app-add-todo></app-add-todo>
+       }
     </div>
 </div>
