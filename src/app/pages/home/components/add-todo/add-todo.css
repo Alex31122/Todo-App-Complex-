@@ -14,3 +14,24 @@
     flex-direction: column;
     gap: 10px
 }
+
+.list{
+  display: flex;
+  gap: 20px;
+}
+
+.tag{
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 15px;
+  padding: 2%;
+  padding-left: 5%;
+}
+
+.selector{
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 30px;
+  padding: 2%;
+  padding-left: 5%;
+}
