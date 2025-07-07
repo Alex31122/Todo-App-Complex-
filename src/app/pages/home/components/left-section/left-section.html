@@ -1,3 +1,38 @@
-<p>left-section works!</p>
-<app-tags-list></app-tags-list>
+<div class="element">
+  <i class="fa-solid fa-calendar-days fa-lg"></i>
+  <p>Calendar</p>
+</div>
+<div class="tasks">
+  <h3>Tasks</h3>
+  <div class="element">
+    <i class="fa-regular fa-file fa-lg"></i>
+    <p>All Tasks</p>
+  </div>
+  <div class="element">
+    <i class="fa-regular fa-star fa-lg"></i>
+    <p>Important</p>
+  </div>
+  <div class="element">
+    <i class="fa-regular fa-hourglass fa-lg"></i>
+    <p>Overdue</p>
+  </div>
+  <div class="element">
+    <i class="fa-solid fa-briefcase fa-lg"></i>
+    <p>ThisWeek</p>
+  </div>
+</div>
+
+<div class="list-bar">
+  <h3>List</h3>
+  <i class="fa-solid fa-plus" (click)="sendSelectionToHome()" ></i>
+</div>
+<div class="list">
+@for (item of tagsList; track $index) {
+  <div class="item">
+    <div class="circle"></div>
+    <div> {{ item }} </div>
+  </div>
+}
+<div>
+
 
