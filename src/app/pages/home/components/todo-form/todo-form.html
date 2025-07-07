@@ -1,8 +1,10 @@
 <h3>To-do: </h3>
 <div class="todo-details">
-    <label for="name">Name: </label>
-    <input id="name" type="text" [formControl]="name" placeholder="Write New Todo" class="title">
-    <input id="description" type="text" [formControl]="description" placeholder="Write New description" class="description">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <input name="name" ngModel required #first="ngModel" placeholder="Write New Todo" class="title"/>
+      <input name="description" ngModel placeholder="Write New description" class="description"/>
+      <button>Submit</button>
+    </form>
     <div class="list">
       <h4>List: </h4>
 

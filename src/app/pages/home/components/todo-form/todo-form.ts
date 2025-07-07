@@ -1,11 +1,15 @@
-import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { TodoService } from '../../service/todo-service';
+import { NgForm } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-todo-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule, JsonPipe],
   templateUrl: './todo-form.html',
-  styleUrl: './todo-form.css'
+  styleUrl: './todo-form.css',
+  // standalone: false,
 })
 export class TodoForm {
   todoList: ToDo[] = [];
@@ -31,5 +35,11 @@ export class TodoForm {
     this.todoList.push(newTodo);
     this.todoService.addTodoListToLocalStorage(this.todoList);
     return newTodo;
+  }
+
+  onSubmit(f: NgForm) {
+    this.addTodoToTodoList(f.value.name, f.value.description, "l");
+    console.log(f.value); // { first: '', last: '' }
+    console.log(f.valid); // false
   }
 }
