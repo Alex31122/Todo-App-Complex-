@@ -1,9 +1,21 @@
 <h2> June 23, 2025 Monday</h2>
-<h2>4 / 10 </h2>
+@if (todoList) {
+  <h2>4 / {{ todoList.length }} </h2>
+}
 <p>Today's Progress</p>
 <p> Progress Bar </p>
 
 <div class="section">
-    <h3>Today</h3>
-    
+  <h3>Today</h3>
+  @for (item of todoList; track $index) {
+    <div class="element">
+      <input
+        type="checkbox"
+        class="checkbox"
+        (change)="onCheckboxChange(item)"
+        [checked]="item.is_completed"
+      >
+      <p>{{ item.name }}</p>
+    </div>
+  }
 </div>
