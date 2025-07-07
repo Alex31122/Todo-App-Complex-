@@ -1,0 +1,12 @@
+<div class="list-bar">
+  <h3>List</h3>
+  <i class="fa-solid fa-plus"></i>
+</div>
+<div class="list">
+@for (item of tagsList; track $index) {
+  <div class="item">
+    <div class="circle"></div>
+    <div> {{ item }} </div>
+  </div>
+}
+<div>
