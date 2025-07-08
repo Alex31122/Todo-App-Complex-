@@ -13,12 +13,16 @@ export class TagForm implements OnInit{
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
-    this.tagsList = this.todoService.fetchTagsList();
+    this.setTagsList();
   }
-
+  
   onSubmit(formData: NgForm) {
     this.tagsList.push(formData.value.name);
     this.todoService.addTagsListToLocalStorage(this.tagsList);
+  }
+  
+  setTagsList(){
+    this.tagsList = this.todoService.fetchTagsList();
   }
 
 }

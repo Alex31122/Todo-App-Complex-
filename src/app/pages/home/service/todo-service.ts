@@ -6,6 +6,9 @@ import { ToDo } from '../models/todoModel';
   providedIn: 'root'
 })
 export class TodoService {
+
+  constructor() { }
+
   fetchTodoList(): ToDo[]{
     // localStorage.removeItem('todoList');
     // localStorage.removeItem('tagsList');
@@ -21,7 +24,7 @@ export class TodoService {
 
   fetchTagsList(){
     const tagsListJson: string | null = localStorage.getItem('tagsList');
-    let tagsList: string[] = [];
+    let tagsList: string[] = ['home', 'work'];
     if(tagsListJson){
       tagsList = JSON.parse(tagsListJson);
       console.log("Tags List on local Storage fetcher using a service");
@@ -40,5 +43,4 @@ export class TodoService {
     localStorage.setItem('tagsList', tagsListJson);
   }
 
-  constructor() { }
 }

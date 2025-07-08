@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../../service/todo-service';
 
 @Component({
   selector: 'app-tags-list',
@@ -6,20 +7,15 @@ import { Component } from '@angular/core';
   templateUrl: './tags-list.html',
   styleUrl: './tags-list.css'
 })
-export class TagsList {
+export class TagsList implements OnInit{
   tagsList: string[] = [];
-  tagsListJson = localStorage.getItem('tagsList');
-  constructor(){
-    if(this.tagsListJson){
-      this.tagsList = JSON.parse(this.tagsListJson);
-    }else{
-      this.tagsList.push("home");
-      this.tagsList.push("work");
-      this.addTagsListToLocalStorage();
-    }
+  constructor(private todoService: TodoService){}
+
+  ngOnInit(){
+    this.setTagsList();
   }
-  addTagsListToLocalStorage(){
-    const tagsList = JSON.stringify(this.tagsList);
-    localStorage.setItem('tagsList', tagsList);
+  
+  setTagsList(){
+    this.tagsList = this.todoService.fetchTagsList();
   }
 }

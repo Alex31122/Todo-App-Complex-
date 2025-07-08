@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TodoService } from '../../service/todo-service';
 
 @Component({
   selector: 'app-all-tasks',
@@ -8,26 +9,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './all-tasks.html',
   styleUrl: './all-tasks.css'
 })
-export class AllTasks {
+export class AllTasks implements OnInit{
   todoList: ToDo[] = [];
 
-  constructor(){
+  constructor(private todoService: TodoService){}
+  
+  ngOnInit(){
     this.setTodoList();
   }
-
+  
   setTodoList(){
-    const todoListJson = localStorage.getItem('todoList');
-    this.todoList = todoListJson ? JSON.parse(todoListJson) : null;
+    this.todoList = this.todoService.fetchTodoList();
   }
 
   onCheckboxChange(item: ToDo): void {
     item.is_completed = !item.is_completed;
-    this.updateProgress();
-  }
-
-  updateProgress(){
-    const TodoList = JSON.stringify(this.todoList);
-    localStorage.setItem('todoList', TodoList);
+    this.todoService.addTodoListToLocalStorage(this.todoList);
   }
 
 }
