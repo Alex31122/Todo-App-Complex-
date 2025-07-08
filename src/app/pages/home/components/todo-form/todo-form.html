@@ -3,17 +3,16 @@
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
       <input name="name" ngModel required #first="ngModel" placeholder="Write New Todo" class="title"/>
       <input name="description" ngModel placeholder="Write New description" class="description"/>
+      <select [(ngModel)]="name" [ngModelOptions]="{name: 'tag'}">
+        @for (item of tagsList; track $index) {
+          <option value={{item}}>{{ item }}</option>
+        }
+      </select>
+
       <button>Submit</button>
     </form>
     <div class="list">
       <h4>List: </h4>
-
-      <select id="miSelector" class="selector" [formControl]="tag">
-        @for (item of tagsList; track $index) {
-          <option value="item">{{ item }}</option>
-        }
-      </select>
-
     </div>
     <h4>Due Date: </h4>
     <h4>Sub Task: </h4>
