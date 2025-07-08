@@ -7,13 +7,11 @@
   <h3>Today</h3>
   @for (item of todoList; track $index) {
     <div class="element">
-      <label for="checkComplete"></label>
+      <label for="checkComplete-{{$index}}"></label> 
       <input
-        id="checkComplete"
-        type="checkbox"
+        id="checkComplete-{{$index}}" type="checkbox"
         class="checkbox"
-        (change)="onCheckboxChange(item)"
-        [checked]="item.is_completed"
+        [(ngModel)]="item.is_completed" (ngModelChange)="onCheckboxChange(item)" 
       >
       <p>{{ item.name }}</p>
     </div>
