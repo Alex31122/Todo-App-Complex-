@@ -1,30 +1,24 @@
+import { TodoService } from './../../service/todo-service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, NgForm, FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-tag-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './tag-form.html',
   styleUrl: './tag-form.css'
 })
 export class TagForm implements OnInit{
   tagsList: string[] = [];
-  name = new FormControl('');
-  tagsListJson = localStorage.getItem('tagsList');
+  constructor(private todoService: TodoService){}
 
   ngOnInit(){
-    // localStorage.removeItem('todoList');
-    if(this.tagsListJson){
-      this.tagsList = JSON.parse(this.tagsListJson);
-    }
-  }
-  addTagToTodoList(name: string){
-    this.tagsList.push(name);
-    this.addTagsListToLocalStorage();
+    this.tagsList = this.todoService.fetchTagsList();
   }
 
-  addTagsListToLocalStorage(){
-    const tagsList = JSON.stringify(this.tagsList);
-    localStorage.setItem('tagsList', tagsList);
+  onSubmit(formData: NgForm) {
+    this.tagsList.push(formData.value.name);
+    this.todoService.addTagsListToLocalStorage(this.tagsList);
   }
+
 }

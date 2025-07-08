@@ -1,12 +1,8 @@
 <h3>New Tag:</h3>
 <div class="todoTag">
-    <label for="name"></label>
-    <input id="name" type="text" [formControl]="name" placeholder="Write New Tag" class="title">
-    <!-- <input id="description" type="text" [formControl]="description" placeholder="Write New description" class="description"> -->
-    @if (name.value) {
-      <p (click)="addTagToTodoList(name.value)">Add Todo</p>
-    }
-    <!-- @if (name.value && description.value && tag.value) { -->
-      <!-- <p (click)="addTodoToTodoList(name.value, description.value, tag.value)">Add new Todo</p> -->
-    <!-- } -->
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <label for="name"></label>
+      <input name="name" ngModel required #first="ngModel" placeholder="Write New Tag" class="title"/>
+      <button>Submit</button>
+    </form>
 </div>
