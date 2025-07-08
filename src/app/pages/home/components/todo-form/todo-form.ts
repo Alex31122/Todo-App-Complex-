@@ -17,17 +17,17 @@ export class TodoForm implements OnInit{
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
-    this.tagsList = this.todoService.fetchTagsList();
-    this.todoList = this.todoService.fetchTodoList();
+    this.setTagsAndTodosList();
   }
 
   onSubmit(formData: NgForm) {
-    const newTodo: ToDo = new ToDo();
-    newTodo.name = formData.value.name;
-    newTodo.description = formData.value.description;
-    newTodo.type = formData.value.tag;
-
+    const newTodo: ToDo = new ToDo(formData.value);
     this.todoList.push(newTodo);
     this.todoService.addTodoListToLocalStorage(this.todoList);
+  }
+
+  setTagsAndTodosList(){
+    this.tagsList = this.todoService.fetchTagsList();
+    this.todoList = this.todoService.fetchTodoList();
   }
 }
