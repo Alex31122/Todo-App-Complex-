@@ -21,13 +21,19 @@ export class TodoForm implements OnInit{
   }
 
   onSubmit(formData: NgForm) {
-    const newTodo: ToDo = new ToDo(formData.value);
-    this.todoList.push(newTodo);
-    this.todoService.addTodoListToLocalStorage(this.todoList);
+    if(formData.valid){
+      const newTodo: ToDo = new ToDo(formData.value); 
+      this.todoList.push(newTodo);
+      this.todoService.addTodoListToLocalStorage(this.todoList);
+      formData.resetForm();
+    }
+    else{
+      console.log("El Formulario no es valido");
+    }
   }
 
   setTagsAndTodosList(){
-    this.tagsList = this.todoService.fetchTagsList();
-    this.todoList = this.todoService.fetchTodoList();
+    this.tagsList = this.todoService.tagsList;
+    this.todoList = this.todoService.todoList;
   }
 }

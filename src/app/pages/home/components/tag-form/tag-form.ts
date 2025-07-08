@@ -22,7 +22,7 @@ export class TagForm implements OnInit{
   }
   
   setTagsList(){
-    this.tagsList = this.todoService.fetchTagsList();
+    this.tagsList = this.todoService.tagsList;
   }
 
 }

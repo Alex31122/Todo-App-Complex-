@@ -1,15 +1,31 @@
 <h3>To-do: </h3>
 <div class="todo-details">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      <input name="name" ngModel required #first="ngModel" placeholder="Write New Todo" class="title"/>
-      <input name="description" ngModel placeholder="Write New description" class="description"/>
-      <select [(ngModel)]="name" [ngModelOptions]="{name: 'tag'}">
+      @if (nameControl.invalid && (nameControl.dirty || nameControl.touched)) {
+        @if (nameControl.errors?.['required']) {
+          <div>Todo name is required: </div>
+        }
+      }
+      @if (descriptionControl.invalid && (descriptionControl.dirty || descriptionControl.touched)) {
+        @if (descriptionControl.errors?.['minlength']) {
+          <div>The description has to be minimum 5 characters long </div>
+        }
+        @if (descriptionControl.errors?.['maxlength']) {
+          <div>The description has to be maximum 100 characters long </div>
+        }
+      }
+      <label for="name"></label>
+      <input name="name" ngModel required #nameControl="ngModel" placeholder="Write New Todo" class="title"/>
+      
+      <label for="description"></label>
+      <input name="description" ngModel #descriptionControl="ngModel" placeholder="Write New description" minlength="5" maxlength="100" class="description"/>
+      <select [(ngModel)]="name" [ngModelOptions]="{name: 'tag'}" #tagControl="ngModel" required>
         @for (item of tagsList; track $index) {
           <option value={{item}}>{{ item }}</option>
         }
       </select>
 
-      <button>Submit</button>
+      <button type="submit" [disabled]="f.invalid">Submit</button>
     </form>
     <div class="list">
       <h4>List: </h4>
