@@ -1,8 +1,13 @@
 <h3>New Tag:</h3>
 <div class="todoTag">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      @if (first.invalid && (first.dirty || first.touched)) {
+        @if (first.errors?.['required']) {
+          <div class="error">Tag name is required: </div>
+        }
+      }
       <label for="name"></label>
       <input name="name" ngModel required #first="ngModel" placeholder="Write New Tag" class="title"/>
-      <button>Submit</button>
+      <button type="submit" [disabled]="f.invalid">Submit</button>
     </form>
 </div>

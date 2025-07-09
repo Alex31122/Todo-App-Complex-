@@ -1,12 +1,14 @@
 <div class="list-bar">
   <h3>List</h3>
-  <i class="fa-solid fa-plus"></i>
+  <button (click)="sendSelectionToSidebar()">
+    <i class="fa-solid fa-plus"></i>
+  </button>
 </div>
-<div class="list">
+<ul class="list">
 @for (item of tagsList; track $index) {
-  <div class="item">
+  <li class="item">
     <div class="circle"></div>
     <div> {{ item }} </div>
-  </div>
+  </li>
 }
-<div>
+<ul>

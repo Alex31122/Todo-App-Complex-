@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { TodoService } from '../../service/todo-service';
 
 @Component({
@@ -9,6 +9,7 @@ import { TodoService } from '../../service/todo-service';
 })
 export class TagsList implements OnInit{
   tagsList: string[] = [];
+  add_tag_selection = output<string>();
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
@@ -17,5 +18,9 @@ export class TagsList implements OnInit{
   
   setTagsList(){
     this.tagsList = this.todoService.tagsList;
+  }
+
+  sendSelectionToSidebar(){
+    this.add_tag_selection.emit("add_tag");
   }
 }
