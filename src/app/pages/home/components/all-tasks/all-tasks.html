@@ -4,14 +4,19 @@
 <p> Progress Bar </p>
 
 <div class="section">
-  <h3>Today</h3>
+  <div class="title">
+    <h3>Today</h3>
+    <button (click)="sendSelectionToHome()" class="button">
+      <i class="fa-solid fa-plus" ></i>
+    </button>
+  </div>
   @for (item of todoList; track $index) {
     <div class="element">
-      <label for="checkComplete-{{$index}}"></label> 
+      <label for="checkComplete-{{$index}}"></label>
       <input
         id="checkComplete-{{$index}}" type="checkbox"
         class="checkbox"
-        [(ngModel)]="item.is_completed" (ngModelChange)="onCheckboxChange(item)" 
+        [(ngModel)]="item.is_completed" (ngModelChange)="onCheckboxChange(item)"
       >
       <p>{{ item.name }}</p>
     </div>

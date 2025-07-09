@@ -1,4 +1,3 @@
-import { TagsList } from './../components/tags-list/tags-list';
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todoModel';
 
@@ -35,7 +34,7 @@ export class TodoService {
     const TodoListJson: string = JSON.stringify(todoList);
     localStorage.setItem('todoList', TodoListJson);
   }
-  
+
   addTagsListToLocalStorage(tagsList: string[]){
     const tagsListJson = JSON.stringify(tagsList);
     localStorage.setItem('tagsList', tagsListJson);

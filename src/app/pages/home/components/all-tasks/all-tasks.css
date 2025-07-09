@@ -3,6 +3,16 @@
   gap: 5%;
 }
 
-/* .checkbox{
-  margin: 5%;
-} */
+.title{
+  display: flex;
+}
+
+.button{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: 5px;
+  background-color: yellow;
+  padding: 6px;
+  border-radius: 10px;
+}

@@ -3,13 +3,18 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="center">
-        <app-all-tasks></app-all-tasks>
+        <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
     </div>
-    <div class="right">
-       @if (!true) {
-        <app-tag-form></app-tag-form>
-       }@else {
-        <app-todo-form></app-todo-form>
-       }
-    </div>
+    @if(selection){
+      <div class="right">
+        @switch (selection) {
+          @case ("add_tag") {
+            <app-tag-form></app-tag-form>
+          }
+          @case ("add_todo") {
+            <app-todo-form></app-todo-form>
+          }
+        }
+      </div>
+    }
 </div>

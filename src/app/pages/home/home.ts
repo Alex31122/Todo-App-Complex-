@@ -12,6 +12,7 @@ import { TodoService } from './service/todo-service';
   styleUrl: './home.css'
 })
 export class Home implements OnInit{
+  selection: string = '';
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
@@ -21,5 +22,10 @@ export class Home implements OnInit{
   fetchData(){
     this.todoService.fetchTagsList();
     this.todoService.fetchTodoList();
+  }
+
+  handleData(data: string): void{
+    console.log("Received data: ", data);
+    this.selection = data;
   }
 }
