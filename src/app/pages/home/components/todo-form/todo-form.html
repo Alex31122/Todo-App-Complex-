@@ -1,6 +1,6 @@
 <h3>To-do: </h3>
 <div class="todo-details">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
       @if (nameControl.invalid && (nameControl.dirty || nameControl.touched)) {
         @if (nameControl.errors?.['required']) {
           <div>Todo name is required: </div>
@@ -14,19 +14,63 @@
           <div>The description has to be maximum 100 characters long </div>
         }
       }
+
       <label for="name"></label>
       <input name="name" ngModel required #nameControl="ngModel" placeholder="Write New Todo" class="title"/>
-      
+
       <label for="description"></label>
-      <input name="description" ngModel #descriptionControl="ngModel" placeholder="Write New description" minlength="5" maxlength="100" class="description"/>
-      <select [(ngModel)]="name" [ngModelOptions]="{name: 'tag'}" #tagControl="ngModel" required>
+      <textarea class="description" id="description" rows="3" ngModel required #nameControl="ngModel"
+        name="description" ngModel #descriptionControl="ngModel" placeholder="Write New description" minlength="5" maxlength="500"
+      ></textarea>
+
+      <select [(ngModel)]="tagDefaultOption" [ngModelOptions]="{name: 'tag'}" required="tag" #tagControl="ngModel" >
         @for (item of tagsList; track $index) {
           <option value={{item}}>{{ item }}</option>
         }
       </select>
 
-      <button type="submit" [disabled]="f.invalid">Submit</button>
+    <button type="submit" [disabled]="f.invalid">Submit</button>
+    </form> -->
+
+    <form [formGroup]="todoForm">
+      <!-- @if (todoForm.invalid && (nameControl.dirty || nameControl.touched)) { -->  
+<!--         @if (todoForm.controls.name.invalid) {
+          <div>Todo name is required: </div>
+        } -->
+      <!-- } -->
+
+<!--       @if (descriptionControl.invalid && (descriptionControl.dirty || descriptionControl.touched)) {
+        @if (descriptionControl.errors?.['minlength']) {
+          <div>The description has to be minimum 5 characters long </div>
+        }
+        @if (descriptionControl.errors?.['maxlength']) {
+          <div>The description has to be maximum 100 characters long </div>
+        }
+      } -->
+
+      {{ todoForm.errors }}
+      <label>
+        name:
+        <input formControlName="name" required>
+      </label>
+      <label>
+        description:
+        <textarea class="description" rows="3" required
+        formControlName="description"
+        placeholder="Write New description" minlength="5" maxlength="500"
+        ></textarea>
+      </label>
+      <label>
+        <select required="tag" formControlName="tag" >
+          @for (item of tagsList; track $index) {
+            <option value={{item}}>{{ item }}</option>
+          }
+        </select>
+      </label>
+
+      <button (click)="onSubmit2()" [disabled]="todoForm.invalid">Submit</button>
     </form>
+
     <div class="list">
       <h4>List: </h4>
     </div>
