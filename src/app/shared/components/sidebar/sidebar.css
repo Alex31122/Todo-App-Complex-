@@ -1,0 +1,33 @@
+.list-bar{
+  display: flex;
+  gap: 75%;
+}
+
+.fa-solid, .fa-regular{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item, .element{
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.circle{
+  background-color: blue;
+  border-radius: 50px;
+  width: 23px;
+  height: 23px;
+}
+
+.element{
+  gap: 30px;
+}
+
