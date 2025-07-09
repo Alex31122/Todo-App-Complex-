@@ -25,7 +25,7 @@ export class Home implements OnInit{
   }
 
   handleData(data: string): void{
-    console.log("Received data: ", data);
+    console.log("Received data on Home: ", data);
     this.selection = data;
   }
 }
