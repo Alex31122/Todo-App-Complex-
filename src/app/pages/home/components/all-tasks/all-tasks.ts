@@ -14,10 +14,15 @@ export class AllTasks implements OnInit{
   todoCompletedList: ToDo[] = [];
   selection = output<string>();
   filter = input<string>();
+  dateString: string = '';
+  
   constructor(private todoService: TodoService){}
   ngOnInit(){
     this.setTodoList();
     this.setTodoCompletedList();
+    this.dateString = this.todoService.dateString;
+    console.log("Today is: ");
+    console.log(this.dateString);
   }
 
   setTodoList(){

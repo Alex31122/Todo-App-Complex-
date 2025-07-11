@@ -7,6 +7,8 @@ import { ToDo } from '../models/todoModel';
 export class TodoService {
   todoList: ToDo[] = [];
   tagsList: string[] = ['home', 'study'];
+  date: Date = new Date();
+  dateString: string = this.date.toDateString();
 
   constructor() { }
 

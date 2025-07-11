@@ -34,6 +34,14 @@
     </div>
 
     <label>Due Date: </label>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <div class="important">
       <label for="important">Important: </label>
       <input formControlName="is_important"  type="checkbox" id="important">
