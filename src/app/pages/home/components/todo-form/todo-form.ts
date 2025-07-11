@@ -20,6 +20,7 @@ export class TodoForm implements OnInit{
     name: new FormControl('', Validators.required),
     description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]),
     tag: new FormControl('', Validators.required),
+    is_important: new FormControl(false),
   });
 
   ngOnInit(){
@@ -33,7 +34,8 @@ export class TodoForm implements OnInit{
       name: this.todoForm.value.name || '',
       description: this.todoForm.value.description || '',
       tag: this.todoForm.value.tag || '',
-      is_completed: false
+      is_important: this.todoForm.value.is_important || false,
+      is_completed: false,
     };
     const newTodo = new ToDo(newTodoData);
     console.log('Form Control Value:', this.todoForm.value);

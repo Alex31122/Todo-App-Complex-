@@ -5,12 +5,14 @@ export class ToDo{
     description: string;
     tag: string;
     is_completed: boolean;
+    is_important: boolean;
 
     constructor(data?: Partial<ToDo>){
         this.name = data?.name ?? "Unnamed ToDo";
         this.description = data?.description ??"Undefined Description";
         this.tag = data?.tag ?? "Undefined Type";
         this.is_completed = data?.is_completed ?? false;
+        this.is_important = data?.is_important ?? false;
     }
 
 

@@ -1,43 +1,47 @@
-<h3>To-do: </h3>
+<h2>To-do: </h2>
 <div class="todo-details">
-    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-      @if (todoForm.get('name')?.hasError('required') && todoForm.dirty) {
-        <div> Name is required </div>
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    @if (todoForm.get('name')?.hasError('required') && todoForm.dirty) {
+      <div> Name is required </div>
+    }
+
+    @if (todoForm.get('description')?.touched) {
+      @if (todoForm.get('description')?.hasError('required')) {
+        <div> Description is required </div>
       }
-
-      @if (todoForm.get('description')?.touched) {
-        @if (todoForm.get('description')?.hasError('required')) {
-          <div> Description is required </div>
-        }
-        @if (todoForm.get('description')?.hasError('minlength') || todoForm.get('description')?.hasError('maxlength')) {
-          <div> Description must be between 5 - 100 characters long </div>
-        }
+      @if (todoForm.get('description')?.hasError('minlength') || todoForm.get('description')?.hasError('maxlength')) {
+        <div> Description must be between 5 - 100 characters long </div>
       }
-      <label>
-        Name:
-      </label>
-      <input formControlName="name" placeholder="Write new todo name" class="title">
-      <label>
-        Description:
-      </label>
-        <textarea class="description" rows="3"
-        formControlName="description"
-        placeholder="Write New description"
-        ></textarea>
-
-
-
-      <div class="list">
-        <h4>List: </h4>
-        <select formControlName="tag" >
-        @for (item of tagsList; track $index) {
-          <option value={{item}}>{{ item }}</option>
-        }
-        </select>
+    }
+    <label for="name"> Name: </label>
+    <input formControlName="name" placeholder="Write new todo name" class="title" id="name">
+    
+    <label for="description"> Description: </label>
+    <textarea 
+    class="description" rows="3"
+    formControlName="description"
+    placeholder="Write New description"
+    id="description"
+    ></textarea>
+    
+    <div class="list">
+      <label for="tag" class=""> List: </label>
+      <select formControlName="tag" id="tag">
+      @for (item of tagsList; track $index) {
+        <option value={{item}}>{{ item }}</option>
+      }
+      </select>
     </div>
-    <h4>Due Date: </h4>
-    <h4>Sub Task: </h4>
-    <h4>Repeat: </h4>
+
+    <label>Due Date: </label>
+    <div class="important">
+      <label for="important">Important: </label>
+      <input formControlName="is_important"  type="checkbox" id="important">
+    </div>
+
+    <label>Sub Task: </label>
+    <label>Repeat: </label>
+
     <button [disabled]="todoForm.invalid">Submit</button>
-    </form>
+  </form>
 </div>

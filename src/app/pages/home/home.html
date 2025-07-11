@@ -3,18 +3,28 @@
       <app-sidebar (selection)="handleData($event)"></app-sidebar>
     </div>
     <div class="center">
-        <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
-    </div>
-    @if(selection){
-      <div class="right">
-        @switch (selection) {
-          @case ("add_tag") {
-            <app-tag-form></app-tag-form>
-          }
-          @case ("add_todo") {
-            <app-todo-form></app-todo-form>
-          }
+      @switch (selection) {
+        @case ("all-tasks-view") {
+          <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
         }
-      </div>
-    }
+        @case ("important-view") {
+          <app-all-tasks (selection)="handleData($event)" filter="is_important"></app-all-tasks>
+        }
+        @default {
+          <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
+        }
+      }
+    </div>
+      @if (selection) {
+        <div class="right">
+          @switch (selection) {
+            @case ("add_tag") {
+              <app-tag-form></app-tag-form>
+            }
+            @case ("add_todo") {
+              <app-todo-form></app-todo-form>
+            }
+          }
+        </div>
+      }
 </div>
