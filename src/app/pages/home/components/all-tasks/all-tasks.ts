@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, output } from '@angular/core';
+import { Component, OnInit, NgModule, output, input } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
@@ -11,18 +11,38 @@ import { TodoService } from '../../service/todo-service';
 })
 export class AllTasks implements OnInit{
   todoList: ToDo[] = [];
+  todoCompletedList: ToDo[] = [];
   selection = output<string>();
+  filter = input<string>();
   constructor(private todoService: TodoService){}
   ngOnInit(){
     this.setTodoList();
+    this.setTodoCompletedList();
   }
 
   setTodoList(){
     this.todoList = this.todoService.todoList;
+    if(this.filter()){
+      if(this.filter() == 'is_important'){
+        this.todoList = this.todoService.todoList.filter(s => s.is_important == true)
+      }
+    }
   }
+
+  setTodoCompletedList(){
+    console.log("TODO COMPLETED LIST:");
+    for (const element of this.todoList) {
+      if(element.is_completed == true){
+        this.todoCompletedList.push(element);
+      }
+    }
+  }
+
 
   onCheckboxChange(item: ToDo): void {
     this.todoService.addTodoListToLocalStorage(this.todoList);
+    this.todoCompletedList = [];
+    this.setTodoCompletedList();
   }
 
   sendSelectionToHome(){
