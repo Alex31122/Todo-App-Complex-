@@ -1,6 +1,5 @@
 .list-bar{
   display: flex;
-  gap: 75%;
 }
 
 .fa-solid{
@@ -30,4 +29,8 @@
 button{
   margin-top: auto;
   margin-bottom: auto;
+  background-color: unset;
+  border: unset;
+  margin-left: auto;
+  margin-right: -5%;
 }

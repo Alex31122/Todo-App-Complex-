@@ -33,15 +33,20 @@ select{
   padding-left: 5%;
 }
 
-.selector{
+select{
   margin-top: auto;
   margin-bottom: auto;
-  height: 30px;
-  padding: 2%;
+  height: 20px;
   padding-left: 5%;
 }
 form{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+label{
+  margin-top: 5px;
+  height: 26px;
+  font-weight: bold;
 }
