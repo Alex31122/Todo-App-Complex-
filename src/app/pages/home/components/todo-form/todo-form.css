@@ -19,6 +19,11 @@
   display: flex;
   gap: 20px;
 }
+select{
+  height: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 .tag{
   margin-top: auto;

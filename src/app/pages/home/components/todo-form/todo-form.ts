@@ -12,38 +12,34 @@ import { TodoService } from '../../service/todo-service';
 export class TodoForm implements OnInit{
   todoList: ToDo[] = [];
   tagsList: string[] = [];
-  tagDefaultOption: string = '';
+  tagDefaultOption: string = 'home';
 
-  nameControl = new FormControl('Initial Name', Validators.required);
-  control = new FormControl('', { updateOn: 'submit' });
   constructor(private todoService: TodoService){}
 
   todoForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    tag: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]),
+    tag: new FormControl('', Validators.required),
   });
 
   ngOnInit(){
     this.setTagsAndTodosList();
     this.tagDefaultOption = this.tagsList[0];
+    this.todoForm.controls.tag.setValue('home');
   }
 
-  onSubmit(formData: NgForm) {
-    if(formData.valid){
-      console.log('Form Control Value:', this.nameControl.value);
-      const newTodo: ToDo = new ToDo(formData.value); 
-      this.todoList.push(newTodo);
-      this.todoService.addTodoListToLocalStorage(this.todoList);
-      formData.resetForm();
-    }
-    else{
-      console.log("El Formulario no es valido");
-    }
-  }
-
-  onSubmit2() {
+  onSubmit() {
+    const newTodoData = {
+      name: this.todoForm.value.name || '',
+      description: this.todoForm.value.description || '',
+      tag: this.todoForm.value.tag || '',
+      is_completed: false
+    };
+    const newTodo = new ToDo(newTodoData);
     console.log('Form Control Value:', this.todoForm.value);
+
+    this.todoList.push(newTodo);
+    this.todoService.addTodoListToLocalStorage(this.todoList);
   }
 
   setTagsAndTodosList(){

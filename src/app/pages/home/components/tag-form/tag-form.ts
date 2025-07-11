@@ -15,7 +15,7 @@ export class TagForm implements OnInit{
   ngOnInit(){
     this.setTagsList();
   }
-  
+
   onSubmit(formData: NgForm) {
     if(formData.valid){
       this.tagsList.push(formData.value.name);
@@ -26,7 +26,7 @@ export class TagForm implements OnInit{
       console.log("El Formulario no es valido");
     }
   }
-  
+
   setTagsList(){
     this.tagsList = this.todoService.tagsList;
   }
