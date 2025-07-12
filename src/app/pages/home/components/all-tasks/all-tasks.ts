@@ -15,7 +15,7 @@ export class AllTasks implements OnInit{
   selection = output<string>();
   filter = input<string>();
   dateString: string = '';
-  
+
   constructor(private todoService: TodoService){}
   ngOnInit(){
     this.setTodoList();
@@ -30,6 +30,14 @@ export class AllTasks implements OnInit{
     if(this.filter()){
       if(this.filter() == 'is_important'){
         this.todoList = this.todoService.todoList.filter(s => s.is_important == true)
+      }
+      if(this.filter() == 'over_due'){
+        this.todoList = this.todoService.todoList.filter(s => s.due_date.getDate() < 11);
+        console.log("Today is: lo:");
+        console.log(this.todoService.date.getDate());
+        console.log(this.todoService.date.getFullYear())
+        console.log("TODO LIST");
+        console.log(this.todoList);
       }
     }
   }

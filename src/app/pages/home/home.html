@@ -10,6 +10,9 @@
         @case ("important-view") {
           <app-all-tasks (selection)="handleData($event)" filter="is_important"></app-all-tasks>
         }
+        @case ("over_due") {
+          <app-all-tasks (selection)="handleData($event)" filter="over_due"></app-all-tasks>
+        }
         @default {
           <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
         }
