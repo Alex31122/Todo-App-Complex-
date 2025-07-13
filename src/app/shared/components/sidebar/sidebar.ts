@@ -1,3 +1,4 @@
+import { TodoService } from './../../../pages/home/service/todo-service';
 import { Component, output } from '@angular/core';
 import { TagsList } from '../../../pages/home/components/tags-list/tags-list';
 @Component({
@@ -10,6 +11,7 @@ export class Sidebar {
   add_tag_selection: string = '';
   selection = output<string>();
 
+  constructor(private todoService: TodoService){}
   handleData(data: string): void{
     console.log("Received data: ", data);
     this.add_tag_selection = data;
@@ -18,5 +20,10 @@ export class Sidebar {
 
   sendSelectionToHome(message: string){
     this.selection.emit(message);
+  }
+
+  mensajeInput: string = '';
+  enviarMensaje(mensaje: string): void {
+    this.todoService.actualizarMensaje(mensaje);
   }
 }

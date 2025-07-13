@@ -5,6 +5,8 @@
     padding: 2%;
     background-color: #ffeac4;
     border-radius: 10px 0px 0px 10px;
+    margin: 50px;
+    margin-right: 0px;
 }
 .center{
     width: 100%;
@@ -13,6 +15,8 @@
 .right{
     width: 33%;
     padding: 2%;
+    margin: 50px;
+    margin-left: 0px;
 }
 
 .sections{

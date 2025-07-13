@@ -4,19 +4,19 @@
 </button>
 <div class="tasks">
   <h3>Tasks</h3>
-  <button class="element" (click)="sendSelectionToHome('all-tasks-view')">
+  <button class="element" (click)="enviarMensaje('all-tasks-view')">
     <i class="fa-regular fa-file fa-lg"></i>
     <p>All Tasks</p>
   </button>
-  <button class="element" (click)="sendSelectionToHome('important-view')">
+  <button class="element" (click)="enviarMensaje('important-view')">
     <i class="fa-regular fa-star fa-lg"></i>
     <p>Important</p>
   </button>
-  <button class="element" (click)="sendSelectionToHome('over_due')">
+  <button class="element" (click)="enviarMensaje('over_due')">
     <i class="fa-regular fa-hourglass fa-lg"></i>
     <p>Overdue</p>
   </button>
-  <button class="element">
+  <button class="element" (click)="enviarMensaje('this_week')">
     <i class="fa-solid fa-briefcase fa-lg"></i>
     <p>ThisWeek</p>
   </button>

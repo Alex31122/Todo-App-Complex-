@@ -15,15 +15,15 @@
     }
     <label for="name"> Name: </label>
     <input formControlName="name" placeholder="Write new todo name" class="title" id="name">
-    
+
     <label for="description"> Description: </label>
-    <textarea 
+    <textarea
     class="description" rows="3"
     formControlName="description"
     placeholder="Write New description"
     id="description"
     ></textarea>
-    
+
     <div class="list">
       <label for="tag" class=""> List: </label>
       <select formControlName="tag" id="tag">
@@ -33,10 +33,10 @@
       </select>
     </div>
 
-    <label>Due Date: </label>
+    <label for="due_date">Due Date: </label>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date">
+      <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date" id="due_date">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

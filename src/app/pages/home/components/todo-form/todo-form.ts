@@ -26,7 +26,7 @@ export class TodoForm implements OnInit{
     description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]),
     tag: new FormControl('', Validators.required),
     is_important: new FormControl(false),
-    due_date: new FormControl(),
+    due_date: new FormControl(new Date()),
   });
 
   ngOnInit(){
@@ -43,13 +43,15 @@ export class TodoForm implements OnInit{
       tag: this.todoForm.value.tag || '',
       is_important: this.todoForm.value.is_important || false,
       is_completed: false,
-      due_date: this.todoForm.value.due_date || null,
+      due_date_string: this.todoForm.value.due_date?.toISOString() || ''
     };
     const newTodo = new ToDo(newTodoData);
     console.log('Form Control Value:', this.todoForm.value);
 
     this.todoList.push(newTodo);
     this.todoService.addTodoListToLocalStorage(this.todoList);
+    this.todoForm.reset();
+    this.todoForm.controls.tag.setValue('home');
   }
 
   setTagsAndTodosList(){

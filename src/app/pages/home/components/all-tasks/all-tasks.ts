@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule, output, input } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-all-tasks',
@@ -11,51 +12,28 @@ import { TodoService } from '../../service/todo-service';
 })
 export class AllTasks implements OnInit{
   todoList: ToDo[] = [];
-  todoCompletedList: ToDo[] = [];
   selection = output<string>();
-  filter = input<string>();
   dateString: string = '';
-
+  private mensajeSubscription: Subscription | undefined;
+  lista: ToDo[] =[];
+  countCompleted = 0;
   constructor(private todoService: TodoService){}
   ngOnInit(){
-    this.setTodoList();
-    this.setTodoCompletedList();
     this.dateString = this.todoService.dateString;
     console.log("Today is: ");
     console.log(this.dateString);
-  }
 
-  setTodoList(){
-    this.todoList = this.todoService.todoList;
-    if(this.filter()){
-      if(this.filter() == 'is_important'){
-        this.todoList = this.todoService.todoList.filter(s => s.is_important == true)
-      }
-      if(this.filter() == 'over_due'){
-        this.todoList = this.todoService.todoList.filter(s => s.due_date.getDate() < 11);
-        console.log("Today is: lo:");
-        console.log(this.todoService.date.getDate());
-        console.log(this.todoService.date.getFullYear())
-        console.log("TODO LIST");
-        console.log(this.todoList);
-      }
-    }
-  }
-
-  setTodoCompletedList(){
-    console.log("TODO COMPLETED LIST:");
-    for (const element of this.todoList) {
-      if(element.is_completed == true){
-        this.todoCompletedList.push(element);
-      }
-    }
+    this.mensajeSubscription = this.todoService.listaActual$.subscribe(mensaje => {
+      this.todoList = mensaje;
+      this.countCompleted = 0;
+    });
+    this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
   }
 
 
   onCheckboxChange(item: ToDo): void {
+    item.is_completed? this.countCompleted++ : this.countCompleted--;
     this.todoService.addTodoListToLocalStorage(this.todoList);
-    this.todoCompletedList = [];
-    this.setTodoCompletedList();
   }
 
   sendSelectionToHome(){
