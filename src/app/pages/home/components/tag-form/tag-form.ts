@@ -1,6 +1,7 @@
 import { TodoService } from './../../service/todo-service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, NgForm, FormsModule} from '@angular/forms';
+import { Tag } from '../../models/tagModel';
 
 @Component({
   selector: 'app-tag-form',
@@ -9,7 +10,7 @@ import { FormControl, ReactiveFormsModule, NgForm, FormsModule} from '@angular/f
   styleUrl: './tag-form.css'
 })
 export class TagForm implements OnInit{
-  tagsList: string[] = [];
+  tagsList: Tag[] = [];
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
@@ -18,7 +19,8 @@ export class TagForm implements OnInit{
 
   onSubmit(formData: NgForm) {
     if(formData.valid){
-      this.tagsList.push(formData.value.name);
+      const newTag = new Tag(formData.value.name);
+      this.tagsList.push(newTag);
       this.todoService.addTagsListToLocalStorage(this.tagsList);
       formData.resetForm();
     }

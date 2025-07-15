@@ -1,5 +1,6 @@
 import { Component, OnInit, output } from '@angular/core';
 import { TodoService } from '../../service/todo-service';
+import { Tag } from '../../models/tagModel';
 
 @Component({
   selector: 'app-tags-list',
@@ -8,14 +9,18 @@ import { TodoService } from '../../service/todo-service';
   styleUrl: './tags-list.css'
 })
 export class TagsList implements OnInit{
-  tagsList: string[] = [];
+  tagsList: Tag[] = [];
   add_tag_selection = output<string>();
   constructor(private todoService: TodoService){}
+  colorDesdeTS: string = 'red';
 
+  cambiarColor() {
+    this.colorDesdeTS = this.colorDesdeTS === 'blue' ? 'red' : 'blue';
+  }
   ngOnInit(){
     this.setTagsList();
   }
-  
+
   setTagsList(){
     this.tagsList = this.todoService.tagsList;
   }

@@ -7,7 +7,7 @@
 <ul class="list">
 @for (item of tagsList; track $index) {
   <li class="item">
-    <div class="circle"></div>
+    <div class="circle" [style.--mi-color-dinamico]="colorDesdeTS"></div>
     <div> {{ item }} </div>
   </li>
 }

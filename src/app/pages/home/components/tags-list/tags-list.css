@@ -24,6 +24,7 @@
   border-radius: 50px;
   width: 23px;
   height: 23px;
+  background-color: var(--mi-color-dinamico);
 }
 
 button{

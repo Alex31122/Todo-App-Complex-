@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todoModel';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Tag } from '../models/tagModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,13 +9,21 @@ export class TodoService {
   todoList: ToDo[] = [];
   filteredTodoList: ToDo[] = [];
   holaList: ToDo[] = [];
-  tagsList: string[] = ['home', 'study'];
+  tagsList: Tag[] = [];
+  tag = new Tag();
   date: Date = new Date();
   dateString: string = this.date.toDateString();
 
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
-  constructor() {}
+  constructor() {
+    this.tag.name = 'home';
+
+    this.tagsList.push(this.tag);
+    this.tag.name = 'study';
+    this.tagsList.push(this.tag);
+
+  }
 
   fetchTodoList(){
     // localStorage.removeItem('todoList');
@@ -46,7 +55,7 @@ export class TodoService {
     localStorage.setItem('todoList', TodoListJson);
   }
 
-  addTagsListToLocalStorage(tagsList: string[]){
+  addTagsListToLocalStorage(tagsList: Tag[]){
     const tagsListJson = JSON.stringify(tagsList);
     localStorage.setItem('tagsList', tagsListJson);
     this.tagsList = tagsList;

@@ -26,8 +26,8 @@ export class AllTasks implements OnInit{
     this.mensajeSubscription = this.todoService.listaActual$.subscribe(mensaje => {
       this.todoList = mensaje;
       this.countCompleted = 0;
+      this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
     });
-    this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
   }
 
 
