@@ -10,19 +10,20 @@ export class TodoService {
   filteredTodoList: ToDo[] = [];
   holaList: ToDo[] = [];
   tagsList: Tag[] = [];
-  tag = new Tag();
   date: Date = new Date();
   dateString: string = this.date.toDateString();
 
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
   constructor() {
-    this.tag.name = 'home';
+    this.addTagToList("home");
+    this.addTagToList("work");
+  }
 
-    this.tagsList.push(this.tag);
-    this.tag.name = 'study';
-    this.tagsList.push(this.tag);
-
+  addTagToList(name: string){
+    const  tag = new Tag();
+    tag.name = name;
+    this.tagsList.push(tag);
   }
 
   fetchTodoList(){
@@ -47,6 +48,8 @@ export class TodoService {
       this.tagsList = JSON.parse(tagsListJson);
       console.log("Tags List on local Storage fetcher using a service");
       console.log(this.tagsList);
+    }else{
+      this.addTagsListToLocalStorage(this.tagsList);
     }
   }
 

@@ -18,7 +18,10 @@
         class="checkbox"
         [(ngModel)]="item.is_completed" (ngModelChange)="onCheckboxChange(item)"
       >
-      <p>{{ item.name }}</p>
+      <div class="info">
+        {{ item.name }}
+        <div class="tag" [style.--mi-color-dinamico]="item.tag.color">{{ item.tag.name }}</div>
+      </div>
     </div>
   }
 </div>

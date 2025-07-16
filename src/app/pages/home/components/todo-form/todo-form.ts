@@ -6,6 +6,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Tag } from '../../models/tagModel';
 @Component({
   selector: 'app-todo-form',
   imports: [ReactiveFormsModule, FormsModule, MatDatepicker, MatInputModule, MatNativeDateModule, MatDatepickerModule],
@@ -15,8 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 })
 export class TodoForm implements OnInit{
   todoList: ToDo[] = [];
-  tagsList: string[] = [];
-  tagDefaultOption: string = 'home';
+  tagsList: Tag[] = [];
   dateString: string = '';
 
   constructor(private todoService: TodoService){}
@@ -31,16 +31,21 @@ export class TodoForm implements OnInit{
 
   ngOnInit(){
     this.setTagsAndTodosList();
-    this.tagDefaultOption = this.tagsList[0];
     this.todoForm.controls.tag.setValue('home');
     this.dateString = this.todoService.dateString;
   }
 
   onSubmit() {
+    const newTag = new Tag();
+    if(this.todoForm.value.tag){
+      newTag.name = this.todoForm.value.tag;
+      const findTag = this.tagsList.filter(s => s.name = newTag.name);
+      newTag.color = findTag[0].color;
+    }
     const newTodoData = {
       name: this.todoForm.value.name || '',
       description: this.todoForm.value.description || '',
-      tag: this.todoForm.value.tag || '',
+      tag: newTag,
       is_important: this.todoForm.value.is_important || false,
       is_completed: false,
       due_date_string: this.todoForm.value.due_date?.toISOString() || ''

@@ -1,7 +1,9 @@
+import { Tag } from "./tagModel";
+
 export class ToDo{
     name: string;
     description: string;
-    tag: string;
+    tag: Tag;
     is_completed: boolean;
     is_important: boolean;
     due_date: Date;
@@ -10,7 +12,7 @@ export class ToDo{
     constructor(data?: Partial<ToDo>){
         this.name = data?.name ?? "Unnamed ToDo";
         this.description = data?.description ??"Undefined Description";
-        this.tag = data?.tag ?? "Undefined Type";
+        this.tag = data?.tag ?? new Tag();
         this.is_completed = data?.is_completed ?? false;
         this.is_important = data?.is_important ?? false;
         this.due_date = data?.due_date ?? new Date();

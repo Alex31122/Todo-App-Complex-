@@ -12,3 +12,23 @@
   padding: 6px;
   border-radius: 10px;
 }
+
+.tag{
+  background-color: var(--mi-color-dinamico);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: fit-content;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  
+}
+
+input {
+  height: 35px;
+  width: 45px;
+}

@@ -19,7 +19,7 @@ export class TagForm implements OnInit{
 
   onSubmit(formData: NgForm) {
     if(formData.valid){
-      const newTag = new Tag(formData.value.name);
+      const newTag = new Tag(formData.value);
       this.tagsList.push(newTag);
       this.todoService.addTagsListToLocalStorage(this.tagsList);
       formData.resetForm();

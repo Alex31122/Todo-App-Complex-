@@ -28,7 +28,7 @@
       <label for="tag" class=""> List: </label>
       <select formControlName="tag" id="tag">
       @for (item of tagsList; track $index) {
-        <option value={{item}}>{{ item }}</option>
+        <option value={{item.name}}>{{ item.name }}</option>
       }
       </select>
     </div>
