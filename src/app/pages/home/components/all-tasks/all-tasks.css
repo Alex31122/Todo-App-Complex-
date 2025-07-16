@@ -25,10 +25,41 @@
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  
+  font-size: 11pt;
 }
 
 input {
   height: 35px;
-  width: 45px;
+  width: 32px;
+}
+
+.text-progress {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-size: small;
+}
+
+progress{
+  width: 100%;
+  height: 1.2rem;
+  background-color: white; 
+  overflow: hidden;
+}
+
+progress::-webkit-progress-value {
+  background-color: #f7d459; 
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #fdf0bd;
+  border-radius: 15px;
+}
+
+progress::-moz-progress-bar {
+  background-color: #f7d459; 
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
 }

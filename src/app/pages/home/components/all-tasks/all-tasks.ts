@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule, output, input } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
-import { Subscription } from 'rxjs';
+import { count, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-all-tasks',
@@ -17,6 +17,7 @@ export class AllTasks implements OnInit{
   private mensajeSubscription: Subscription | undefined;
   lista: ToDo[] =[];
   countCompleted = 0;
+  progressPercentage: number = 0;
   constructor(private todoService: TodoService){}
   ngOnInit(){
     this.dateString = this.todoService.dateString;
@@ -28,6 +29,7 @@ export class AllTasks implements OnInit{
       this.countCompleted = 0;
       this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
     });
+    this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
   }
 
 

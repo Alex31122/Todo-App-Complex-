@@ -1,8 +1,8 @@
 <h2> {{ dateString }}</h2>
 <h2> {{ countCompleted }} / {{ todoList.length }} </h2>
 <p>Today's Progress</p>
-<p> Progress Bar </p>
-
+<progress class="w3-red"  id="file" [max]="todoList.length" [value]="countCompleted">70%</progress>
+<p class="text-progress">{{ progressPercentage }}% completed</p>
 <div class="section">
   <div class="title">
     <h3>Today</h3>
@@ -23,5 +23,7 @@
         <div class="tag" [style.--mi-color-dinamico]="item.tag.color">{{ item.tag.name }}</div>
       </div>
     </div>
+  }@empty {
+    <li>There are no Todos on your list</li>    
   }
 </div>
