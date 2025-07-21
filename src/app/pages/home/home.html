@@ -5,9 +5,9 @@
     <div class="center">
       <app-all-tasks />
     </div>
-      @if (selection) {
+      @if (add_selection) {
         <div class="right">
-          @switch (selection) {
+        @switch (add_selection) {
             @case ("add_tag") {
               <app-tag-form></app-tag-form>
             }

@@ -36,8 +36,8 @@ export class AllTasks implements OnInit{
       this.todoList = mensaje;
       this.countCompleted = 0;
       this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
+      this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
     });
-    this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
   }
 
 

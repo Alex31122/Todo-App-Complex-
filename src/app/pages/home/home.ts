@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AllTasks } from "./components/all-tasks/all-tasks";
 import { Sidebar } from "../../shared/components/sidebar/sidebar";
 import { TagForm } from "./components/tag-form/tag-form";
@@ -12,33 +12,17 @@ import { TodoService } from './service/todo-service';
   styleUrl: './home.css'
 })
 export class Home implements OnInit{
-  selection: string = '';
-  selection2: string = '';
-  constructor(private todoService: TodoService){}
+  add_selection: string = '';
+  todoService = inject(TodoService);
 
   ngOnInit(){
-    this.fetchData();
     this.todoService._selectionObservable.subscribe({
       next: (data: string) => {
-        if(data == 'add_tag'){
-          console.log("YOU SELECTED TAG");
-          this.selection = data;
-        }
-        else if(data == 'add_todo'){
-          console.log("YOU SELECTED TODO");
-          this.selection = data;
+        if(data.substring(0, 3) == "add"){
+          this.add_selection = data;
         }
       }
     });
   }
-
-  fetchData(){
-    this.todoService.fetchTagsList();
-    this.todoService.fetchTodoList();
-  }
-
-  handleData(data: string): void{
-    console.log("Received data on Home: ", data);
-    this.selection = data;
-  }
+  
 }

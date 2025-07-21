@@ -12,14 +12,13 @@ export class TodoService {
   tagsList: Tag[] = [];
   date: Date = new Date();
   dateString: string = this.date.toDateString();
-/*   private _slectionObservable = new Observable((suscriber) => {
-    suscriber.next('all_tasks');
-  }); */
   _selectionObservable = new Subject<string>();
 
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
   constructor() {
+    this.fetchTagsList();
+    this.fetchTodoList();
     this.addTagToList("home");
     this.addTagToList("work");
     this._selectionObservable.next("all_tasks2");
