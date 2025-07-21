@@ -17,11 +17,10 @@ export class TodoService {
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
   constructor() {
-    this.fetchTagsList();
-    this.fetchTodoList();
     this.addTagToList("home");
     this.addTagToList("work");
-    this._selectionObservable.next("all_tasks2");
+    this.fetchTagsList();
+    this.fetchTodoList();
   }
 
   addTagToList(name: string){
