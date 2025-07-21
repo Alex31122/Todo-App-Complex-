@@ -1,9 +1,9 @@
 <div class="sections">
     <div class="sidebar">
-      <app-sidebar (selection)="handleData($event)"></app-sidebar>
+      <app-sidebar />
     </div>
     <div class="center">
-        <app-all-tasks (selection)="handleData($event)"></app-all-tasks>
+      <app-all-tasks />
     </div>
       @if (selection) {
         <div class="right">

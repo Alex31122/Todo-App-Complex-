@@ -1,11 +1,11 @@
 <div class="list-bar">
   <h3>List</h3>
-  <button (click)="sendSelectionToSidebar()">
+  <button (click)="sendSelectionToService()">
     <i class="fa-solid fa-plus"></i>
   </button>
 </div>
 <ul class="list">
-@for (item of tagsList; track $index) {
+@for (item of todoService.tagsList; track $index) {
   <li class="item">
     <div class="circle" [style.--mi-color-dinamico]="item.color"></div>
     <div> {{ item.name }} </div>

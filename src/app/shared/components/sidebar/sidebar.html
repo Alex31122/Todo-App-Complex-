@@ -4,21 +4,21 @@
 </button>
 <div class="tasks">
   <h3>Tasks</h3>
-  <button class="element" (click)="enviarMensaje('all-tasks-view')">
+  <button class="element" (click)="sendViewSelectionToService('all-tasks-view')">
     <i class="fa-regular fa-file fa-lg"></i>
     <p>All Tasks</p>
   </button>
-  <button class="element" (click)="enviarMensaje('important-view')">
+  <button class="element" (click)="sendViewSelectionToService('important-view')">
     <i class="fa-regular fa-star fa-lg"></i>
     <p>Important</p>
   </button>
-  <button class="element" (click)="enviarMensaje('over_due')">
+  <button class="element" (click)="sendViewSelectionToService('over_due')">
     <i class="fa-regular fa-hourglass fa-lg"></i>
     <p>Overdue</p>
   </button>
-  <button class="element" (click)="enviarMensaje('this_week')">
+  <button class="element" (click)="sendViewSelectionToService('this_week')">
     <i class="fa-solid fa-briefcase fa-lg"></i>
     <p>ThisWeek</p>
   </button>
 </div>
-<app-tags-list (add_tag_selection)="handleData($event)"></app-tags-list>
+<app-tags-list />

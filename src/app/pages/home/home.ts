@@ -13,10 +13,23 @@ import { TodoService } from './service/todo-service';
 })
 export class Home implements OnInit{
   selection: string = '';
+  selection2: string = '';
   constructor(private todoService: TodoService){}
 
   ngOnInit(){
     this.fetchData();
+    this.todoService._selectionObservable.subscribe({
+      next: (data: string) => {
+        if(data == 'add_tag'){
+          console.log("YOU SELECTED TAG");
+          this.selection = data;
+        }
+        else if(data == 'add_todo'){
+          console.log("YOU SELECTED TODO");
+          this.selection = data;
+        }
+      }
+    });
   }
 
   fetchData(){

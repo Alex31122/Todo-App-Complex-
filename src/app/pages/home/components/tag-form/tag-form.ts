@@ -1,5 +1,5 @@
 import { TodoService } from './../../service/todo-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { FormControl, ReactiveFormsModule, NgForm, FormsModule} from '@angular/forms';
 import { Tag } from '../../models/tagModel';
 
@@ -9,28 +9,17 @@ import { Tag } from '../../models/tagModel';
   templateUrl: './tag-form.html',
   styleUrl: './tag-form.css'
 })
-export class TagForm implements OnInit{
-  tagsList: Tag[] = [];
-  constructor(private todoService: TodoService){}
-
-  ngOnInit(){
-    this.setTagsList();
-  }
-
+export class TagForm {
+  todoService = inject(TodoService);
   onSubmit(formData: NgForm) {
     if(formData.valid){
       const newTag = new Tag(formData.value);
-      this.tagsList.push(newTag);
-      this.todoService.addTagsListToLocalStorage(this.tagsList);
+      this.todoService.tagsList.push(newTag);
+      this.todoService.addTagsListToLocalStorage(this.todoService.tagsList);
       formData.resetForm();
     }
     else{
       console.log("El Formulario no es valido");
     }
   }
-
-  setTagsList(){
-    this.tagsList = this.todoService.tagsList;
-  }
-
 }

@@ -21,10 +21,18 @@ export class AllTasks implements OnInit{
   constructor(private todoService: TodoService){}
   ngOnInit(){
     this.dateString = this.todoService.dateString;
+    console.log("ACTUALL VIEW");
+    this.todoService._selectionObservable.subscribe({
+      next: (data) => {
+        console.log("SELECTION OBSERVABLE DATA");
+        console.log(data);
+      }
+    });
     console.log("Today is: ");
     console.log(this.dateString);
 
     this.mensajeSubscription = this.todoService.listaActual$.subscribe(mensaje => {
+      console.log("Message", mensaje);
       this.todoList = mensaje;
       this.countCompleted = 0;
       this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
@@ -37,9 +45,8 @@ export class AllTasks implements OnInit{
     item.is_completed? this.countCompleted++ : this.countCompleted--;
     this.todoService.addTodoListToLocalStorage(this.todoList);
   }
-
-  sendSelectionToHome(){
-    this.selection.emit("add_todo");
+  sendSelectionToService(){
+    this.todoService._selectionObservable.next("add_todo");
   }
-
+  
 }

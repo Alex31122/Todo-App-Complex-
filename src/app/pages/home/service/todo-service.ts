@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todoModel';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Tag } from '../models/tagModel';
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,17 @@ export class TodoService {
   tagsList: Tag[] = [];
   date: Date = new Date();
   dateString: string = this.date.toDateString();
+/*   private _slectionObservable = new Observable((suscriber) => {
+    suscriber.next('all_tasks');
+  }); */
+  _selectionObservable = new Subject<string>();
 
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
   constructor() {
     this.addTagToList("home");
     this.addTagToList("work");
+    this._selectionObservable.next("all_tasks2");
   }
 
   addTagToList(name: string){
