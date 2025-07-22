@@ -38,7 +38,8 @@ export class AllTasks implements OnInit{
 
   onCheckboxChange(item: ToDo): void {
     item.is_completed? this.countCompleted++ : this.countCompleted--;
-    this.todoService.addTodoListToLocalStorage(this.todoList);
+    this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
+    this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
   }
   sendSelectionToService(){
     this.todoService._selectionObservable.next("add_todo");

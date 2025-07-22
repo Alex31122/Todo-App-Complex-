@@ -21,6 +21,7 @@ export class TodoService {
     this.addTagToList("work");
     this.fetchTagsList();
     this.fetchTodoList();
+    this.date.setHours(0, 0 ,0, 0);
   }
 
   addTagToList(name: string){
@@ -80,6 +81,7 @@ export class TodoService {
       for (const element of this.todoList) {
         console.log(element.due_date);
         console.log(this.date);
+        element.due_date.setHours(0, 0, 0, 0);
         if(element.due_date.getTime() < this.date.getTime()){
           this.holaList.push(element);
         }
