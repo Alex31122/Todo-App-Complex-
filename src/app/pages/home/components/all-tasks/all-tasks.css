@@ -7,10 +7,14 @@
 }
 
 .button{
-  margin: auto 10px auto auto;
+  margin: auto 50px auto auto;
   background-color: yellow;
   padding: 6px;
   border-radius: 10px;
+}
+
+.progress-bar{
+  margin-right: 50px;
 }
 
 .tag{
@@ -62,4 +66,10 @@ progress::-moz-progress-bar {
   background-color: #f7d459; 
   border-radius: 15px;
   transition: width 0.3s ease-in-out;
+}
+
+.chevron {
+  margin: auto 50px auto auto;
+  border: none;
+  background: none;
 }

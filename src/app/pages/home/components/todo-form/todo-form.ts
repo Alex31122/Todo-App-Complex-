@@ -18,6 +18,7 @@ export class TodoForm implements OnInit{
   todoList: ToDo[] = [];
   tagsList: Tag[] = [];
   dateString: string = '';
+  color: string = '';
 
   constructor(private todoService: TodoService){}
 
@@ -33,6 +34,14 @@ export class TodoForm implements OnInit{
     this.setTagsAndTodosList();
     this.todoForm.controls.tag.setValue('home');
     this.dateString = this.todoService.dateString;
+  }
+
+  setColor(s?: string){
+    if(s){
+      const tag = this.tagsList.filter(t => t.name == s);
+      this.color = tag.at(0)?.color ?? '';
+    }
+    console.log(s);
   }
 
   onSubmit() {

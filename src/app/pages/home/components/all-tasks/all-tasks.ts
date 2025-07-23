@@ -41,8 +41,15 @@ export class AllTasks implements OnInit{
     this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
     this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
   }
-  sendSelectionToService(){
-    this.todoService._selectionObservable.next("add_todo");
+  sendSelectionToService(message: string, todo?: ToDo, index?: number){
+    this.todoService._selectionObservable.next(message);
+    if(message == "edit" && todo && index){
+      console.log(todo);
+      console.log("Index of todo: ", index);
+      this.todoService.actuallTodo = todo;
+      const data = [todo, index];
+      this.todoService._actualTodoItem.next(data);
+    }
   }
   
 }

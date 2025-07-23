@@ -23,6 +23,7 @@ select{
   height: 50%;
   margin-top: auto;
   margin-bottom: auto;
+  background-color: var(--mi-color-dinamico);
 }
 
 .tag{
@@ -32,7 +33,6 @@ select{
   padding: 2%;
   padding-left: 5%;
 }
-
 select{
   margin-top: auto;
   margin-bottom: auto;
