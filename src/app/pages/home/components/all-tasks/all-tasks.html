@@ -1,5 +1,5 @@
-<h2> {{ dateString }}</h2>
-<h2> {{ countCompleted }} / {{ todoList.length }} </h2>
+<h2> {{ date | date:'fullDate' }}</h2>
+<p class="progress"> {{ countCompleted }} / {{ todoList.length }} </p>
 <p>Today's Progress</p>
 <div class="progress-bar">
   <progress class="w3-red"  id="file" [max]="todoList.length" [value]="countCompleted">70%</progress>
@@ -12,6 +12,7 @@
       <i class="fa-solid fa-plus" ></i>
     </button>
   </div>
+  <div class="list">
   @for (item of todoList; track $index) {
     <div class="element">
       <label for="checkComplete-{{$index}}"></label>
@@ -31,4 +32,6 @@
   }@empty {
     <li>There are no Todos on your list</li>
   }
+  </div>
+
 </div>

@@ -1,9 +1,20 @@
+<div class="profile">
+  <div class="profile-image"></div>
+  <p class="profile-name">Juan Dela Cruz</p>
+</div>
+<div class="search-bar">
+  <div class="text-bar">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    search
+  </div>
+</div>
+
 <button class="element">
   <i class="fa-solid fa-calendar-days fa-lg"></i>
   <p>Calendar</p>
 </button>
 <div class="tasks">
-  <h3>Tasks</h3>
+  <p class="title">Tasks</p>
   <button class="element" (click)="sendViewSelectionToService('all-tasks-view')">
     <i class="fa-regular fa-file fa-lg"></i>
     <p>All Tasks</p>
@@ -22,3 +33,13 @@
   </button>
 </div>
 <app-tags-list />
+<div class="options">
+  <button class="settings">
+    <i class="fa-solid fa-gear"></i>
+    Settings
+  </button>
+  <button class="sign-out">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    Log Out
+  </button>
+</div>

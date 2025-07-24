@@ -1,5 +1,22 @@
+h2{
+  margin: 0px;
+  margin-bottom: 15px;
+}
+.progress{
+  font-size: 16pt;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+p{
+  margin: 0px;
+  margin-bottom: 15px;
+}
+
 .element{
   display: flex;
+  font-size: 0.9rem;
 }
 
 .title{
@@ -20,28 +37,33 @@
 .tag{
   background-color: var(--mi-color-dinamico);
   border-radius: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   width: fit-content;
+  height: 16px;
 }
 
 .info{
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  font-size: 11pt;
 }
 
 input {
-  height: 35px;
-  width: 32px;
+  height: 24px;
+  width: 24px;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .text-progress {
-  margin-left: auto;
-  margin-right: auto;
   width: fit-content;
   font-size: small;
+  margin: 0px auto;
 }
 
 progress{

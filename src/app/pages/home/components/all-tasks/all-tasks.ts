@@ -3,15 +3,17 @@ import { ToDo } from '../../models/todoModel';
 import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
 import { count, Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-all-tasks',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, DatePipe],
   templateUrl: './all-tasks.html',
   styleUrl: './all-tasks.css'
 })
 export class AllTasks implements OnInit{
   todoList: ToDo[] = [];
+  date: Date = new Date();
   dateString: string = '';
   private mensajeSubscription: Subscription | undefined;
   countCompleted = 0;

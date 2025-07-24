@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { TodoService } from '../../service/todo-service';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -15,16 +15,15 @@ import { Tag } from '../../models/tagModel';
   standalone: true,
 })
 export class TodoForm implements OnInit{
+  todoService = inject(TodoService);
   todoList: ToDo[] = [];
   tagsList: Tag[] = [];
   dateString: string = '';
   color: string = '';
   todoEditing = input<number>(0);
 
-  constructor(private todoService: TodoService){}
-
   todoForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl(this.todoService.todoList.at(this.todoEditing())?.name ?? '', Validators.required),
     description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]),
     tag: new FormControl('', Validators.required),
     is_important: new FormControl(false),

@@ -15,7 +15,7 @@
       }
     }
     <label for="name"> Name: </label>
-    <input formControlName="name" value ="hola" placeholder="{{ todoEditing() || 'Write new todo'}}" class="title" id="name" >
+    <input formControlName="name" placeholder="{{ todoEditing() || 'Write new todo'}}" class="title" id="name" >
 
     <label for="description"> Description: </label>
     <textarea
@@ -49,7 +49,7 @@
     </div>
 
     <label>Sub Task: </label>
-    <label>Repeat: </label>
+    <label>Repeat </label>
 
     <button [disabled]="todoForm.invalid">Submit</button>
   </form>

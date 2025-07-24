@@ -1,11 +1,10 @@
 .sidebar{
-    width: 33%;
+    width: 22%;
     min-width: 175px;
-    max-width: 300px;
+    max-width: 240px;
     padding: 2%;
     background-color: #ffeac4;
     border-radius: 10px 0px 0px 10px;
-    margin: 50px;
     margin-right: 0px;
 }
 .center{
@@ -13,12 +12,14 @@
     padding: 2%;
 }
 .right{
-    width: 33%;
+    width: 18%;
+    /* width: 22%; */
+    /* width: 35%; */
     padding: 2%;
-    margin: 50px;
-    margin-left: 0px;
+    padding-left: 0px;
 }
 
 .sections{
     display: flex;
+    height: 100%;
 }
