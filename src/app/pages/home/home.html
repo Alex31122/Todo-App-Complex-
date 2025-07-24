@@ -12,9 +12,10 @@
               <app-tag-form />
             }
             @case ("add_todo") {
-              <app-todo-form />            }
+              <app-todo-form />
+            }
             @case ("edit") {
-              <app-edit-todo />
+              <app-todo-form [todoEditing]="index"/>
             }
           }
         </div>

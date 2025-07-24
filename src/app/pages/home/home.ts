@@ -4,16 +4,16 @@ import { Sidebar } from "../../shared/components/sidebar/sidebar";
 import { TagForm } from "./components/tag-form/tag-form";
 import { TodoForm } from "./components/todo-form/todo-form";
 import { TodoService } from './service/todo-service';
-import { EditTodo } from "./components/edit-todo/edit-todo";
 
 @Component({
   selector: 'app-home',
-  imports: [AllTasks, Sidebar, TagForm, TodoForm, EditTodo],
+  imports: [AllTasks, Sidebar, TagForm, TodoForm],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home implements OnInit{
   add_selection: string = '';
+  index: number = -1;
   todoService = inject(TodoService);
 
   ngOnInit(){
@@ -24,6 +24,11 @@ export class Home implements OnInit{
         }
       }
     });
+    this.todoService._editIndexObservable.subscribe({
+      next: (data: number) => {
+        this.index = data;
+      }
+    });
   }
-  
+
 }

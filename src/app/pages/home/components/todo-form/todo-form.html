@@ -1,4 +1,5 @@
 <h2>To-do: </h2>
+{{ todoEditing() }}
 <div class="todo-details">
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     @if (todoForm.get('name')?.hasError('required') && todoForm.dirty) {
@@ -14,7 +15,7 @@
       }
     }
     <label for="name"> Name: </label>
-    <input formControlName="name" placeholder="Write new todo name" class="title" id="name">
+    <input formControlName="name" value ="hola" placeholder="{{ todoEditing() || 'Write new todo'}}" class="title" id="name" >
 
     <label for="description"> Description: </label>
     <textarea

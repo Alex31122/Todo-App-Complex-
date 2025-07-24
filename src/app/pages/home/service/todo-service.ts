@@ -13,8 +13,7 @@ export class TodoService {
   date: Date = new Date();
   dateString: string = this.date.toDateString();
   _selectionObservable = new Subject<string>();
-  _actualTodoItem = new Subject<(ToDo | number)[]>();
-  actuallTodo: ToDo = new ToDo();
+  _editIndexObservable = new Subject<number>();
 
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();

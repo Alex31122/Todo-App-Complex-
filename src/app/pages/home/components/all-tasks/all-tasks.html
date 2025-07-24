@@ -24,11 +24,11 @@
         {{ item.name }}
         <div class="tag" [style.--mi-color-dinamico]="item.tag.color">{{ item.tag.name }}</div>
       </div>
-      <button class="chevron" (click)="sendSelectionToService('edit', item, $index)">
+      <button class="chevron" (click)="sendSelectionToService('edit', item)">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
   }@empty {
-    <li>There are no Todos on your list</li>    
+    <li>There are no Todos on your list</li>
   }
 </div>

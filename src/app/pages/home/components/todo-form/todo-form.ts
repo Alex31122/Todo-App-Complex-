@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { TodoService } from '../../service/todo-service';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -19,6 +19,7 @@ export class TodoForm implements OnInit{
   tagsList: Tag[] = [];
   dateString: string = '';
   color: string = '';
+  todoEditing = input<number>(0);
 
   constructor(private todoService: TodoService){}
 
