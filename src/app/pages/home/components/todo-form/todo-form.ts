@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, HostAttributeToken, inject, input, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { TodoService } from '../../service/todo-service';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -20,10 +20,11 @@ export class TodoForm implements OnInit{
   tagsList: Tag[] = [];
   dateString: string = '';
   color: string = '';
-  todoEditing = input<number>(0);
+  todoIndex = input<number>(-1);
+  todoInfo: ToDo  = new ToDo();
 
   todoForm = new FormGroup({
-    name: new FormControl(this.todoService.todoList.at(this.todoEditing())?.name ?? '', Validators.required),
+    name: new FormControl('', Validators.required),
     description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]),
     tag: new FormControl('', Validators.required),
     is_important: new FormControl(false),
@@ -31,9 +32,31 @@ export class TodoForm implements OnInit{
   });
 
   ngOnInit(){
-    this.setTagsAndTodosList();
     this.todoForm.controls.tag.setValue('home');
+    if(this.todoIndex() >= 0){
+      this.todoInfo = this.todoService.todoList.at(this.todoIndex()) ?? this.todoInfo;
+      this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
+    }
+    this.todoService._editIndexObservable.subscribe({
+      next: (data) => {
+        this.todoInfo = this.todoService.todoList.at(data) ?? this.todoInfo;
+        this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
+      }
+    });
+
+    this.setTagsAndTodosList();
     this.dateString = this.todoService.dateString;
+  }
+
+  transformTodoToFormValues(todo: ToDo){
+    const todoFormValue = {
+      name: todo.name,
+      description: todo.description,
+      tag: todo.tag.name,
+      is_important: todo.is_important,
+      due_date: todo.due_date,
+    };
+    return todoFormValue;
   }
 
   setColor(s?: string){
@@ -62,8 +85,17 @@ export class TodoForm implements OnInit{
     const newTodo = new ToDo(newTodoData);
     console.log('Form Control Value:', this.todoForm.value);
 
-    this.todoList.push(newTodo);
-    this.todoService.addTodoListToLocalStorage(this.todoList);
+    if(!this.todoForm.dirty){
+      return;
+    }
+
+    if(this.todoIndex() >= 0){
+      newTodo.due_date = this.todoInfo.due_date;
+      this.todoService.todoList[this.todoIndex()] = newTodo;
+    }else{
+      this.todoList.push(newTodo);
+    }
+    this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
     this.todoForm.reset();
     this.todoForm.controls.tag.setValue('home');
   }
