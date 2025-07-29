@@ -76,7 +76,7 @@ export class TodoForm implements OnInit{
     const newTag = new Tag();
     if(this.todoForm.value.tag){
       newTag.name = this.todoForm.value.tag;
-      const findTag = this.tagsList.find(tag => newTag.name);      
+      const findTag = this.tagsList.find(tag => tag.name == newTag.name);
       newTag.color = findTag?.color ?? '';
     }
     const newTodoData = {
@@ -96,6 +96,7 @@ export class TodoForm implements OnInit{
 
     if(this.todoIndex() >= 0){
       newTodo.due_date = this.todoInfo.due_date;
+      newTodo.is_completed = this.todoInfo.is_completed;
       this.todoService.todoList[this.todoIndex()] = newTodo;
     }else{
       this.todoList.push(newTodo);

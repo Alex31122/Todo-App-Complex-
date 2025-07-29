@@ -22,6 +22,9 @@ export class TodoService {
     this.addTagToList("work");
     this.fetchTagsList();
     this.fetchTodoList();
+    if(!this.todoList){
+      this.addTagsListToLocalStorage(this.tagsList);
+    }
     this.date.setHours(0, 0 ,0, 0);
   }
 
