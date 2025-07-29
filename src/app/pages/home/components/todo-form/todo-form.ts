@@ -41,7 +41,7 @@ export class TodoForm implements OnInit{
       this.is_editing = true;
     }
     this.todoService._editIndexObservable.subscribe({
-      next: (data) => {
+      next: (data) => {      
         this.todoInfo = this.todoService.todoList.at(data) ?? this.todoInfo;
         this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
         this.is_editing = true;
@@ -91,11 +91,14 @@ export class TodoForm implements OnInit{
     console.log('Form Control Value:', this.todoForm.value);
 
     if(!this.todoForm.dirty){
+      this.todoForm.reset();
+      this.todoForm.controls.tag.setValue('home');
+      this.is_editing = false;
+      console.log("YOU DIDN'T CHANGE THE TODO");
       return;
     }
-
-    if(this.todoIndex() >= 0){
-      newTodo.due_date = this.todoInfo.due_date;
+    if(this.todoIndex() >= 0 && this.is_editing){
+      newTodo.due_date = this.todoForm.value?.due_date ?? this.todoInfo.due_date;
       newTodo.is_completed = this.todoInfo.is_completed;
       this.todoService.todoList[this.todoIndex()] = newTodo;
     }else{

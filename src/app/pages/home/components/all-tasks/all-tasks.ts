@@ -46,10 +46,7 @@ export class AllTasks implements OnInit{
   sendSelectionToService(message: string, todo?: ToDo){
     this.todoService._selectionObservable.next(message);
     if(message == "edit" && todo){
-      console.log(todo);
-      console.log("TODO INDEX ON ORIGINAL TODO LIST: ");
       const index = this.todoService.todoList.findIndex(todo2 => todo2.name == todo.name);
-      console.log(index);
       this.todoService._editIndexObservable.next(index);
     }
   }
