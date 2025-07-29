@@ -19,7 +19,7 @@ export class Home implements OnInit{
   ngOnInit(){
     this.todoService._selectionObservable.subscribe({
       next: (data: string) => {
-        if(data.substring(0, 3) == "add" || data === "edit"){
+        if(data.substring(0, 3) == "add" || data.substring(0, 4) == "edit"){
           this.add_selection = data;
         }
       }

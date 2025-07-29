@@ -17,6 +17,9 @@
             @case ("edit") {
               <app-todo-form [todoIndex]="index"/>
             }
+            @case ("edit_tag") {
+              <app-tag-form [tagIndex]="index"/>
+            }
           }
         </div>
       }
