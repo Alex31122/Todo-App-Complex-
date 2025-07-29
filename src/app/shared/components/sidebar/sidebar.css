@@ -89,7 +89,7 @@ button{
   margin: 0px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 }
 .settings, .sign-out{
   display: flex;

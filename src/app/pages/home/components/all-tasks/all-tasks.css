@@ -25,9 +25,11 @@ p{
 
 .button{
   margin: auto 50px auto auto;
-  background-color: yellow;
+  background-color: #f7cb3b;
   padding: 6px;
   border-radius: 10px;
+  border: unset;
+  padding: 7px;
 }
 
 .progress-bar{

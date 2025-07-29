@@ -13,9 +13,10 @@
 }
 .right{
     width: 18%;
+    height: 93%;
     /* width: 22%; */
     /* width: 35%; */
-    padding: 2%;
+    padding: 0% 2% 0% 2%;
     padding-left: 0px;
 }
 
