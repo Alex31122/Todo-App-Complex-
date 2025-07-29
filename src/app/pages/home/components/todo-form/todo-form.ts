@@ -7,9 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Tag } from '../../models/tagModel';
+import { NgStyle } from '@angular/common';
 @Component({
   selector: 'app-todo-form',
-  imports: [ReactiveFormsModule, FormsModule, MatDatepicker, MatInputModule, MatNativeDateModule, MatDatepickerModule],
+  imports: [ReactiveFormsModule, FormsModule, MatDatepicker, MatInputModule, MatNativeDateModule, MatDatepickerModule, NgStyle],
   templateUrl: './todo-form.html',
   styleUrl: './todo-form.css',
   standalone: true,
@@ -22,6 +23,7 @@ export class TodoForm implements OnInit{
   color: string = '';
   todoIndex = input<number>(-1);
   todoInfo: ToDo  = new ToDo();
+  is_editing: Boolean = false;
 
   todoForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -36,15 +38,18 @@ export class TodoForm implements OnInit{
     if(this.todoIndex() >= 0){
       this.todoInfo = this.todoService.todoList.at(this.todoIndex()) ?? this.todoInfo;
       this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
+      this.is_editing = true;
     }
     this.todoService._editIndexObservable.subscribe({
       next: (data) => {
         this.todoInfo = this.todoService.todoList.at(data) ?? this.todoInfo;
         this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
+        this.is_editing = true;
       }
     });
 
     this.setTagsAndTodosList();
+    this.color = this.todoService.tagsList.find(s => s.name == "home")?.color ?? "blue";
     this.dateString = this.todoService.dateString;
   }
 
@@ -71,8 +76,8 @@ export class TodoForm implements OnInit{
     const newTag = new Tag();
     if(this.todoForm.value.tag){
       newTag.name = this.todoForm.value.tag;
-      const findTag = this.tagsList.filter(s => s.name = newTag.name);
-      newTag.color = findTag[0].color;
+      const findTag = this.tagsList.find(tag => newTag.name);      
+      newTag.color = findTag?.color ?? '';
     }
     const newTodoData = {
       name: this.todoForm.value.name || '',
@@ -98,6 +103,15 @@ export class TodoForm implements OnInit{
     this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
     this.todoForm.reset();
     this.todoForm.controls.tag.setValue('home');
+    this.is_editing = false;
+  }
+
+  deleteTodo(){
+    this.todoService.todoList.splice(this.todoIndex(), 1);
+    this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
+    this.todoForm.reset();
+    this.todoForm.controls.tag.setValue('home');
+    this.is_editing = false;
   }
 
   setTagsAndTodosList(){

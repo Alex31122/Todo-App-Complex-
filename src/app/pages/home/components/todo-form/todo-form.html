@@ -1,5 +1,5 @@
-<h2>To-do: </h2>
 <div class="todo-details">
+  <h2>To-do: </h2>
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     @if (todoForm.get('name')?.hasError('required') && todoForm.dirty) {
       <div> Name is required </div>
@@ -28,9 +28,9 @@
       <label for="tag" class=""> List: </label>
       <select formControlName="tag" id="tag" [style.--mi-color-dinamico]="color" (click)="setColor(todoForm.value.tag!)">
       @for (item of tagsList; track $index) {
-        <option value={{item.name}} (click)="setColor(item.color)">{{ item.name }}</option>
+        <option value={{item.name}} (click)="setColor(item.color)" [ngStyle]="{'background-color': item.color}" >{{ item.name }}</option>
       }
-    </select>
+      </select>
     </div>
 
     <label for="due_date">Due Date: </label>
@@ -48,8 +48,25 @@
     </div>
 
     <label>Sub Task: </label>
-    <label>Repeat </label>
-
-    <button [disabled]="todoForm.invalid">Submit</button>
+    <div class="add_sub_task">
+      <button>
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <div>Add New Sub Task</div>
+    </div>
+    <div class="repeat">
+      <i class="fa-solid fa-repeat"></i>
+      <label>Repeat: </label>
+    </div>
+    <div class="option-buttons">
+      @if (is_editing) {
+        <div class="buttons-group">
+          <button [disabled]="todoForm.invalid" class="delete" (click)="deleteTodo()">Delete Task</button>
+          <button [disabled]="todoForm.invalid" class="save">Save Changes</button>
+        </div>
+      }@else{
+        <button [disabled]="todoForm.invalid" class="save-todo">Save Todo</button>
+      }
+      </div>
   </form>
 </div>
