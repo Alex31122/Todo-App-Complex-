@@ -34,7 +34,7 @@ export class TodoForm implements OnInit{
   });
 
   ngOnInit(){
-    this.todoForm.controls.tag.setValue('home');
+    this.todoForm.controls.tag.setValue(this.todoService.tagsList[0].name ?? 'home');
     if(this.todoIndex() >= 0){
       this.todoInfo = this.todoService.todoList.at(this.todoIndex()) ?? this.todoInfo;
       this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
