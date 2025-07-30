@@ -1,5 +1,5 @@
-<p>home works!</p>
 <div class="sections">
+<<<<<<< HEAD
   <div class="left">
       <app-left-section (selection)="handleData($event)"></app-left-section>
     </div>
@@ -19,4 +19,30 @@
       </div>
     }
 
+=======
+    <div class="sidebar">
+      <app-sidebar />
+    </div>
+    <div class="center">
+      <app-all-tasks />
+    </div>
+      @if (add_selection) {
+        <div class="right">
+        @switch (add_selection) {
+            @case ("add_tag") {
+              <app-tag-form />
+            }
+            @case ("add_todo") {
+              <app-todo-form />
+            }
+            @case ("edit") {
+              <app-todo-form [todoIndex]="index"/>
+            }
+            @case ("edit_tag") {
+              <app-tag-form [tagIndex]="index"/>
+            }
+          }
+        </div>
+      }
+>>>>>>> origin/code-refactoring
 </div>

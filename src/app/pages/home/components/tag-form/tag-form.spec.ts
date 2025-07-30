@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddList } from './add-list';
+import { TagForm } from './tag-form';
 
-describe('AddList', () => {
-  let component: AddList;
-  let fixture: ComponentFixture<AddList>;
+describe('TagForm', () => {
+  let component: TagForm;
+  let fixture: ComponentFixture<TagForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddList]
+      imports: [TagForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddList);
+    fixture = TestBed.createComponent(TagForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

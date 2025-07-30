@@ -1,0 +1,103 @@
+.profile{
+  display: flex;
+  gap: 20px
+}
+
+.profile-image{
+  border-radius: 50px;
+  height: 35px;
+  width:35px;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: blue;
+}
+
+.profile-name{
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 15pt;
+  font-weight: bold;
+}
+
+.text-bar{
+  display: flex;
+  gap: 10px;
+  width: 90px;
+  height: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+}
+
+.search-bar{
+  height: 1.2rem;
+  background-color: #fcdd87;
+  border-radius: 50px;
+  margin: 20px 0px 20px 0px;
+}
+
+.list-bar{
+  display: flex;
+  gap: 75%;
+}
+
+.fa-solid, .fa-regular{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item, .element{
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-top: -2px;
+}
+
+.circle{
+  background-color: blue;
+  border-radius: 50px;
+  width: 23px;
+  height: 23px;
+}
+
+.element{
+  gap: 30px;
+}
+
+i{
+  width: 20px;
+}
+
+button{
+  background-color: unset;
+  border: unset;
+}
+
+.title{
+  font-size: 14pt;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.options{
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.settings, .sign-out{
+  display: flex;
+  gap: 30px;
+}
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}

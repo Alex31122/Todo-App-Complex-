@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CenterContent } from './center-content';
+import { TodoForm } from './todo-form';
 
-describe('CenterContent', () => {
-  let component: CenterContent;
-  let fixture: ComponentFixture<CenterContent>;
+describe('TodoForm', () => {
+  let component: TodoForm;
+  let fixture: ComponentFixture<TodoForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CenterContent]
+      imports: [TodoForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CenterContent);
+    fixture = TestBed.createComponent(TodoForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

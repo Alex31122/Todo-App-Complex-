@@ -1,0 +1,49 @@
+<div class="sidebar">
+  <div>
+    <div class="profile">
+      <div class="profile-image"></div>
+      <p class="profile-name">Juan Dela Cruz</p>
+    </div>
+    <div class="search-bar">
+      <div class="text-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        search
+      </div>
+    </div>
+
+    <button class="element">
+      <i class="fa-solid fa-calendar-days fa-lg"></i>
+      <p>Calendar</p>
+    </button>
+    <div class="tasks">
+      <p class="title">Tasks</p>
+      <button class="element" (click)="sendViewSelectionToService('all-tasks-view')">
+        <i class="fa-regular fa-file fa-lg"></i>
+        <p>All Tasks</p>
+      </button>
+      <button class="element" (click)="sendViewSelectionToService('important-view')">
+        <i class="fa-regular fa-star fa-lg"></i>
+        <p>Important</p>
+      </button>
+      <button class="element" (click)="sendViewSelectionToService('over_due')">
+        <i class="fa-regular fa-hourglass fa-lg"></i>
+        <p>Overdue</p>
+      </button>
+      <button class="element" (click)="sendViewSelectionToService('this_week')">
+        <i class="fa-solid fa-briefcase fa-lg"></i>
+        <p>ThisWeek</p>
+      </button>
+    </div>
+    <app-tags-list />
+  </div>
+  <div class="options">
+    <button class="settings">
+      <i class="fa-solid fa-gear"></i>
+      Settings
+    </button>
+    <button class="sign-out">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      Log Out
+    </button>
+  </div>
+</div>

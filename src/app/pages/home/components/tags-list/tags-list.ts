@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject} from '@angular/core';
+import { TodoService } from '../../service/todo-service';
+import { Tag } from '../../models/tagModel';
 
 @Component({
   selector: 'app-tags-list',
@@ -6,20 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './tags-list.html',
   styleUrl: './tags-list.css'
 })
-export class TagsList {
-  tagsList: string[] = [];
-  tagsListJson = localStorage.getItem('tagsList');
-  constructor(){
-    if(this.tagsListJson){
-      this.tagsList = JSON.parse(this.tagsListJson);
-    }else{
-      this.tagsList.push("home");
-      this.tagsList.push("work");
-      this.addTagsListToLocalStorage();
+export class TagsList{
+  todoService = inject(TodoService);
+  sendSelectionToService(message: string, tag?: Tag){
+    this.todoService._selectionObservable.next(message);    
+    if(message == "edit_tag" && tag){
+      const index = this.todoService.tagsList.findIndex(tag2 => tag2.name == tag.name); 
+      this.todoService._editIndexObservable.next(index);
     }
-  }
-  addTagsListToLocalStorage(){
-    const tagsList = JSON.stringify(this.tagsList);
-    localStorage.setItem('tagsList', tagsList);
   }
 }
