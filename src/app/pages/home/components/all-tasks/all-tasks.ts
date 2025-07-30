@@ -1,54 +1,33 @@
-import { Component, OnInit, NgModule, output, input, inject } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
-import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
-import { TodoService } from '../../service/todo-service';
-import { count, Subscription } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-all-tasks',
-  imports: [ReactiveFormsModule, FormsModule, DatePipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './all-tasks.html',
   styleUrl: './all-tasks.css'
 })
-export class AllTasks implements OnInit{
+export class AllTasks {
   todoList: ToDo[] = [];
-  date: Date = new Date();
-  dateString: string = '';
-  private mensajeSubscription: Subscription | undefined;
-  countCompleted = 0;
-  progressPercentage = 0;
-  private todoService = inject(TodoService);
-  ngOnInit(){
-    this.dateString = this.todoService.dateString;
-    console.log("ACTUALL VIEW");
-    this.todoService._selectionObservable.subscribe({
-      next: (data) => {
-        console.log("SELECTION OBSERVABLE DATA");
-        console.log(data);
-      }
-    });
-    this.mensajeSubscription = this.todoService.listaActual$.subscribe(mensaje => {
-      console.log("Message", mensaje);
-      this.todoList = mensaje;
-      this.countCompleted = 0;
-      this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
-      this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
-    });
+  selection = output<string>();
+  constructor(){
+    this.setTodoList();
   }
 
+  setTodoList(){
+    const todoListJson = localStorage.getItem('todoList');
+    this.todoList = todoListJson ? JSON.parse(todoListJson) : null;
+  }
 
   onCheckboxChange(item: ToDo): void {
-    item.is_completed? this.countCompleted++ : this.countCompleted--;
-    this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
-    this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
+    item.is_completed = !item.is_completed;
+    this.updateProgress();
   }
-  sendSelectionToService(message: string, todo?: ToDo){
-    this.todoService._selectionObservable.next(message);
-    if(message == "edit" && todo){
-      const index = this.todoService.todoList.findIndex(todo2 => todo2.name == todo.name);
-      this.todoService._editIndexObservable.next(index);
-    }
+
+  updateProgress(){
+    const TodoList = JSON.stringify(this.todoList);
+    localStorage.setItem('todoList', TodoList);
   }
 
   sendSelectionToHome(){

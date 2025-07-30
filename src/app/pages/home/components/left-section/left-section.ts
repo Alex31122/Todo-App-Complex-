@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-
+import { Component, EventEmitter, output, Output } from '@angular/core';
 @Component({
-  selector: 'app-tags-list',
+  selector: 'app-left-section',
   imports: [],
-  templateUrl: './tags-list.html',
-  styleUrl: './tags-list.css'
+  templateUrl: './left-section.html',
+  styleUrl: './left-section.css'
 })
-export class TagsList {
+export class LeftSection {
+  selection = output<string>();
   tagsList: string[] = [];
   tagsListJson = localStorage.getItem('tagsList');
   constructor(){
@@ -21,5 +21,9 @@ export class TagsList {
   addTagsListToLocalStorage(){
     const tagsList = JSON.stringify(this.tagsList);
     localStorage.setItem('tagsList', tagsList);
+  }
+
+  sendSelectionToHome(){
+    this.selection.emit("add_tag");
   }
 }

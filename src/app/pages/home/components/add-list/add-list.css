@@ -1,8 +1,5 @@
 .todoTag{
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-.error{
-  margin-bottom: 20px;
+  gap: 30px;
 }

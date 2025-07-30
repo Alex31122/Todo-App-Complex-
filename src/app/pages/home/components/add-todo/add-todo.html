@@ -1,0 +1,22 @@
+<h3>To-do: </h3>
+<div class="todo-details">
+    <label for="name">Name: </label>
+    <input id="name" type="text" [formControl]="name" placeholder="Write New Todo" class="title">
+    <input id="description" type="text" [formControl]="description" placeholder="Write New description" class="description">
+    <div class="list">
+      <h4>List: </h4>
+
+      <select id="miSelector" class="selector" [formControl]="tag">
+        @for (item of tagsList; track $index) {
+          <option value="item">{{ item }}</option>
+        }
+      </select>
+
+    </div>
+    <h4>Due Date: </h4>
+    <h4>Sub Task: </h4>
+    <h4>Repeat: </h4>
+    @if (name.value && description.value && tag.value) {
+      <p (click)="addTodoToTodoList(name.value, description.value, tag.value)">Add new Todo</p>
+    }
+</div>

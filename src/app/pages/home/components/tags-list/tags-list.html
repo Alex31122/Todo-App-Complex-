@@ -1,16 +1,12 @@
 <div class="list-bar">
-  <p>List</p>
-  <button class="button" (click)="sendSelectionToService('add_tag')">
-    <i class="fa-solid fa-plus"></i>
-  </button>
+  <h3>List</h3>
+  <i class="fa-solid fa-plus"></i>
 </div>
-<ul class="list">
-@for (item of todoService.tagsList; track $index) {
-  <button class="tag" (click)="sendSelectionToService('edit_tag', item)">
-    <li class="item">
-      <div class="circle" [style.--mi-color-dinamico]="item.color"></div>
-      <div> {{ item.name }} </div>
-    </li>
-  </button>
+<div class="list">
+@for (item of tagsList; track $index) {
+  <div class="item">
+    <div class="circle"></div>
+    <div> {{ item }} </div>
+  </div>
 }
-<ul>
+<div>
