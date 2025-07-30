@@ -1,27 +1,31 @@
 .profile{
   display: flex;
-  gap: 20px
+}
+
+.tasks{
+  margin-bottom: 7px;
 }
 
 .profile-image{
+  margin: auto 0px auto 0px;
   border-radius: 50px;
-  height: 35px;
-  width:35px;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid black;
   background-color: blue;
 }
 
 .profile-name{
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 10px;
   font-size: 15pt;
   font-weight: bold;
 }
 
 .text-bar{
   display: flex;
-  gap: 10px;
+  gap: 6px;
   width: 90px;
   height: 1rem;
   margin-left: auto;
@@ -33,7 +37,8 @@
   height: 1.2rem;
   background-color: #fcdd87;
   border-radius: 50px;
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 5px 0px;
+  font-size: small;
 }
 
 .list-bar{
@@ -52,11 +57,11 @@
   gap: 10px;
 }
 
-.item, .element{
+.item, .element, .calendar{
   display: flex;
   gap: 20px;
   width: 100%;
-  margin-top: -2px;
+  margin-bottom: -15px;
 }
 
 .circle{
@@ -65,7 +70,16 @@
   width: 23px;
   height: 23px;
 }
-
+.calendar{
+  gap: 10px;
+  margin: 0px;
+}
+.element{
+  margin-left: -7px;
+}
+.fa-calendar-days{
+  margin-left: -10px;
+}
 .element{
   gap: 30px;
 }
@@ -80,7 +94,7 @@ button{
 }
 
 .title{
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -93,7 +107,7 @@ button{
 }
 .settings, .sign-out{
   display: flex;
-  gap: 30px;
+  gap: 23px;
 }
 .sidebar{
   display: flex;

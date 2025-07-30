@@ -1,10 +1,14 @@
 .list-bar{
   display: flex;
   height: 40px;
+  margin-bottom: -8px;
 }
-
+.item-name{
+  margin: auto;
+  font-size: small;
+}
 p{
-  font-size: 15pt;
+  font-size: 13pt;
   font-weight: bold;
 }
 .fa-solid{
@@ -20,8 +24,8 @@ p{
 
 .item, .tag{
   display: flex;
-  gap: 20px;
-  margin-left: -2.1rem;
+  gap: 25px;
+  margin-left: -2.4rem;
 }
 
 .circle{
@@ -37,7 +41,7 @@ p{
   background-color: unset;
   border: unset;
   margin-left: auto;
-  margin-right: -5%;
+  margin-right: -5px;
 }
 
 .tag{
