@@ -25,7 +25,7 @@
     ></textarea>
 
     <div class="list">
-      <label for="tag" class=""> List: </label>
+      <label for="tag" class="extra"> List: </label>
       <select formControlName="tag" id="tag" [style.--mi-color-dinamico]="color" (click)="setColor(todoForm.value.tag!)">
       @for (item of tagsList; track $index) {
         <option value={{item.name}} (click)="setColor(item.color)" [ngStyle]="{'background-color': item.color}" >{{ item.name }}</option>
@@ -33,9 +33,9 @@
       </select>
     </div>
 
-    <label for="due_date">Due Date: </label>
+    <label for="due_date" class="extra">Due Date: </label>
 
-    <mat-form-field>
+    <mat-form-field class="extra">
       <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date" id="due_date">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -43,11 +43,11 @@
     </mat-form-field>
 
     <div class="important">
-      <label for="important">Important: </label>
+      <label for="important" class="extra">Important: </label>
       <input formControlName="is_important"  type="checkbox" id="important">
     </div>
 
-    <label>Sub Task: </label>
+    <label class="extra">Sub Task: </label>
     <div class="add_sub_task">
       <button>
         <i class="fa-solid fa-plus"></i>

@@ -4,10 +4,11 @@ import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
 import { count, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
 
 @Component({
   selector: 'app-all-tasks',
-  imports: [ReactiveFormsModule, FormsModule, DatePipe],
+  imports: [ReactiveFormsModule, FormsModule, DatePipe, DatePipe2],
   templateUrl: './all-tasks.html',
   styleUrl: './all-tasks.css'
 })

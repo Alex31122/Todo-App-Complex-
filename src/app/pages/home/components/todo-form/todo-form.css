@@ -1,5 +1,6 @@
 h2{
   margin: 0px;
+  font-size: 16pt;
 }
 .title{
     height: 15px;
@@ -18,6 +19,10 @@ h2{
     gap: 10px;
     height: 100%;
     padding-top: 20%;
+}
+
+.extra, .add_sub_task{
+  margin-left: 10px;
 }
 form{
   height: 100%;
