@@ -3,12 +3,12 @@ h2{
   font-size: 16pt;
 }
 .title{
-    height: 15px;
+    height: 50px;
     padding: 2%;
     padding-left: 5%;
 }
 .description{
-    height: 75px;
+    height: 175px;
     padding: 2%;
     padding-left: 5%;
 }
@@ -30,7 +30,7 @@ form{
 
 .list{
   display: flex;
-  gap: 20px;
+  gap: 12px;
 }
 
 .tag{
@@ -57,6 +57,7 @@ label{
   margin-top: 5px;
   height: 26px;
   font-weight: bold;
+  font-size: 11pt;
 }
 
 button{
@@ -67,12 +68,12 @@ button{
 
 .add_sub_task{
   display: flex;
-  gap: 35px;
+  gap: 27px;
 }
 
 .repeat{
   display: flex;
-  gap: 25px;
+  gap: 27px;
 }
 
 .fa-repeat{
