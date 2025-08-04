@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AllTasks } from "./components/all-tasks/all-tasks";
+import { TasksView } from "./components/tasks-view/tasks-view";
 import { Sidebar } from "../../shared/components/sidebar/sidebar";
 import { TagForm } from "./components/tag-form/tag-form";
 import { TodoForm } from "./components/todo-form/todo-form";
@@ -7,7 +7,7 @@ import { TodoService } from './service/todo-service';
 
 @Component({
   selector: 'app-home',
-  imports: [AllTasks, Sidebar, TagForm, TodoForm],
+  imports: [TasksView, Sidebar, TagForm, TodoForm],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

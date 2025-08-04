@@ -7,12 +7,12 @@ import { DatePipe } from '@angular/common';
 import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
 
 @Component({
-  selector: 'app-all-tasks',
+  selector: 'app-tasks-view',
   imports: [ReactiveFormsModule, FormsModule, DatePipe, DatePipe2],
-  templateUrl: './all-tasks.html',
-  styleUrl: './all-tasks.css'
+  templateUrl: './tasks-view.html',
+  styleUrl: './tasks-view.css'
 })
-export class AllTasks implements OnInit{
+export class TasksView implements OnInit{
   todoList: ToDo[] = [];
   date: Date = new Date();
   dateString: string = '';

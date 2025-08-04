@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllTasks } from './all-tasks';
+import { TasksView } from './tasks-view';
 
-describe('AllTasks', () => {
-  let component: AllTasks;
-  let fixture: ComponentFixture<AllTasks>;
+describe('TasksView', () => {
+  let component: TasksView;
+  let fixture: ComponentFixture<TasksView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AllTasks]
+      imports: [TasksView]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AllTasks);
+    fixture = TestBed.createComponent(TasksView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
