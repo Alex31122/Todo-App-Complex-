@@ -18,7 +18,7 @@ h2{
     flex-direction: column;
     gap: 10px;
     height: 100%;
-    padding-top: 20%;
+    padding-top: 15%;
 }
 
 .extra, .add_sub_task{
