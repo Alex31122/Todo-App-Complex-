@@ -92,7 +92,7 @@ export class TodoForm implements OnInit{
 
     if(!this.todoForm.dirty){
       this.todoForm.reset();
-      this.todoForm.controls.tag.setValue('home');
+      this.todoForm.controls.tag.setValue(this.todoService.tagsList[0].name);
       this.is_editing = false;
       console.log("YOU DIDN'T CHANGE THE TODO");
       return;
@@ -106,7 +106,7 @@ export class TodoForm implements OnInit{
     }
     this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
     this.todoForm.reset();
-    this.todoForm.controls.tag.setValue('home');
+    this.todoForm.controls.tag.setValue(this.todoService.tagsList[0].name);
     this.is_editing = false;
   }
 
@@ -114,7 +114,7 @@ export class TodoForm implements OnInit{
     this.todoService.todoList.splice(this.todoIndex(), 1);
     this.todoService.addTodoListToLocalStorage(this.todoService.todoList);
     this.todoForm.reset();
-    this.todoForm.controls.tag.setValue('home');
+    this.todoForm.controls.tag.setValue(this.todoService.tagsList[0].name);
     this.is_editing = false;
   }
 
