@@ -10,8 +10,8 @@
   background-image: url('../../../../../public/premium_photo-1689568126014-06fea9d5d341.jpg');
   margin: auto 0px auto 0px;
   border-radius: 50px;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background-size: cover;  
   background-position: center; 
 }
@@ -96,7 +96,6 @@ button{
 
 .title{
   font-size: 12pt;
-  font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
 }
