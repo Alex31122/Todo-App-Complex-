@@ -13,16 +13,30 @@
         <div> Description must be between 5 - 100 characters long </div>
       }
     }
-    <label for="name"> Name: </label>
-    <input formControlName="name" placeholder="Write new todo" class="title" id="name" >
-
-    <label for="description"> Description: </label>
-    <textarea
-    class="description" rows="3"
-    formControlName="description"
-    placeholder="Write New description"
-    id="description"
-    ></textarea>
+    @if (!is_editing) {
+      <label for="name"> Name: </label>
+      <input formControlName="name" placeholder="Write new todo" class="title" id="name" >
+    }@else {
+      <input formControlName="name" placeholder="Write new todo" class="title2" id="name" >
+    }
+    @if (!is_editing) {
+      <label for="description"> Description: </label>
+      <textarea
+      class="description" rows="3"
+      formControlName="description"
+      placeholder="Write New description"
+      id="description"
+      ></textarea>
+    }@else{
+      <textarea
+      class="description2" rows="3"
+      formControlName="description"
+      placeholder="Write New description"
+      id="description"
+      ></textarea>
+    }
+    
+    
 
     <div class="list">
       <label for="tag" class="extra"> List: </label>
@@ -33,14 +47,18 @@
       </select>
     </div>
 
-    <label for="due_date" class="extra">Due Date: </label>
+    <label for="due_date" class="extra">Due Date: 
+      <button class="selector" (click)="changeValue()" type="button">{{todoForm.controls.due_date.value | date:'fullDate' | date2 }}</button>
+    </label>
 
-    <mat-form-field class="extra">
-      <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date" id="due_date">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    @if(display_selector){ 
+      <mat-form-field class="extra">
+        <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date" id="due_date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    }
 
     <div class="important">
       <label for="important" class="extra">Important: </label>

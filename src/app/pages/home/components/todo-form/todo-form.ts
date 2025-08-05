@@ -8,9 +8,22 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Tag } from '../../models/tagModel';
 import { NgStyle } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
+
 @Component({
   selector: 'app-todo-form',
-  imports: [ReactiveFormsModule, FormsModule, MatDatepicker, MatInputModule, MatNativeDateModule, MatDatepickerModule, NgStyle],
+  imports: [
+    ReactiveFormsModule, 
+    FormsModule, 
+    MatDatepicker, 
+    MatInputModule, 
+    MatNativeDateModule, 
+    MatDatepickerModule, 
+    NgStyle,
+    DatePipe,
+    DatePipe2
+  ],
   templateUrl: './todo-form.html',
   styleUrl: './todo-form.css',
   standalone: true,
@@ -24,6 +37,7 @@ export class TodoForm implements OnInit{
   todoIndex = input<number>(-1);
   todoInfo: ToDo  = new ToDo();
   is_editing: Boolean = false;
+  display_selector = false;
 
   todoForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -49,7 +63,7 @@ export class TodoForm implements OnInit{
     });
 
     this.setTagsAndTodosList();
-    this.color = this.todoService.tagsList.find(s => s.name == "home")?.color ?? "blue";
+    this.color = this.todoService.tagsList.find(s => s.name == "Work")?.color ?? "blue";
     this.dateString = this.todoService.dateString;
   }
 
@@ -64,6 +78,9 @@ export class TodoForm implements OnInit{
     return todoFormValue;
   }
 
+  changeValue(){
+    this.display_selector = !this.display_selector;
+  }
   setColor(s?: string){
     if(s){
       const tag = this.tagsList.filter(t => t.name == s);

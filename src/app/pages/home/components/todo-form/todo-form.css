@@ -2,22 +2,31 @@ h2{
   margin: 0px;
   font-size: 16pt;
 }
-.title{
+.title, .title2{
     height: 50px;
     padding: 2%;
     padding-left: 5%;
 }
-.description{
+.title2{
+  padding: 5%;
+  margin-top: 17px;
+}
+.description, .description2{
     height: 175px;
     padding: 2%;
     padding-left: 5%;
 }
 
+.description2{
+  height: 220px;
+}
+
 .todo-details{
+    width: 256px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 95%;
+    height: 97.5%;
     padding-top: 33%;
 }
 
@@ -66,6 +75,10 @@ button{
   border: unset;
 }
 
+.selector{
+  margin: 0px;
+}
+
 .add_sub_task{
   display: flex;
   gap: 27px;
@@ -108,4 +121,8 @@ button{
   font-size: 11pt;
   margin: 0px;
   padding: 4%;
+}
+
+input, textarea{
+  border: 3px solid #dddddd;
 }
