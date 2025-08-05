@@ -18,8 +18,10 @@ export class TodoService {
   private _listaActual = new BehaviorSubject<ToDo[]>([]);
   public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
   constructor() {
-    this.addTagToList("home");
-    this.addTagToList("work");
+    this.addTagToList("Work", "#b1dbfe");
+    this.addTagToList("Personal", "#fdb1ba");
+    this.addTagToList("HouseHold", "#bbaeff");
+    this.addTagToList("Business", "#b3faad");
     this.fetchTagsList();
     this.fetchTodoList();
     if(!this.todoList){
@@ -28,9 +30,12 @@ export class TodoService {
     this.date.setHours(0, 0 ,0, 0);
   }
 
-  addTagToList(name: string){
-    const  tag = new Tag();
+  addTagToList(name: string, color?: string){
+    const tag = new Tag();
     tag.name = name;
+    if(color){
+      tag.color = color;
+    }
     this.tagsList.push(tag);
   }
 

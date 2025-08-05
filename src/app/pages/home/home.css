@@ -6,13 +6,15 @@
     background-color: #fff6d9;
     border-radius: 10px 0px 0px 10px;
     margin-right: 0px;
-    padding-top: 4.5%;
+    padding-top: 45px;
 }
 .center{
     width: 100%;
     padding: 2%;
     overflow-y: auto; 
     padding-top: 5%;
+    padding-top: 55px;
+    padding-left: 60px;
 }
 .right{
     width: 18%;
@@ -21,6 +23,7 @@
     /* width: 35%; */
     padding: 1.2% 1% 0% 1%;
     padding-left: 0px;
+    padding-top: 20px;
 }
 
 .sections{

@@ -102,3 +102,57 @@ progress::-moz-progress-bar {
   border: none;
   background: none;
 }
+
+.hidden-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.visual-checkbox {
+  height: 20px;
+  width: 20px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.visual-checkbox::after {
+  content: '';
+  position: absolute;
+  display: none; 
+
+  left: 8px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.hidden-checkbox:checked + .visual-checkbox::after {
+  display: block; /* Muestra la palomita */
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.task-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.visual-checkbox::after {
+  left: 8px;
+  top: 2px;
+  width: 3px;
+}

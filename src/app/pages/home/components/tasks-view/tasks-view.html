@@ -3,7 +3,7 @@
 <p style="font-weight: bold;">Today's Progress</p>
 <div class="progress-bar">
   <progress class="w3-red"  id="file" [max]="todoList.length" [value]="countCompleted">70%</progress>
-  <p class="text-progress">{{ progressPercentage }}% completed</p>
+  <p class="text-progress">{{ progressPercentage || 0 }}% completed</p>
 </div>
 <div class="section">
   <div class="title">
@@ -15,12 +15,10 @@
   <div class="list">
   @for (item of todoList; track $index) {
     <div class="element">
-      <label for="checkComplete-{{$index}}"></label>
-      <input
-        id="checkComplete-{{$index}}" type="checkbox"
-        class="checkbox"
+      <input type="checkbox" id="checkComplete-{{$index}}" class="hidden-checkbox" 
         [(ngModel)]="item.is_completed" (ngModelChange)="onCheckboxChange(item)"
       >
+      <label for="checkComplete-{{$index}}" class="visual-checkbox"></label>
       <div class="info">
         {{ item.name }}
         <div class="tag" [style.--mi-color-dinamico]="item.tag.color">{{ item.tag.name }}</div>
