@@ -40,15 +40,18 @@
 
     <div class="list">
       <label for="tag" class="extra"> List: </label>
-      <select formControlName="tag" id="tag" [style.--mi-color-dinamico]="color" (click)="setColor(todoForm.value.tag!)">
-      @for (item of tagsList; track $index) {
-        <option value={{item.name}} (click)="setColor(item.color)" [ngStyle]="{'background-color': item.color}" >{{ item.name }}</option>
+      <button class="tag_selector" (click)="changeValue(2)" type="button" [style.--mi-color-dinamico]="color">{{todoForm.controls.tag.value}}</button>
+      @if (tag_selector) {
+        <select formControlName="tag" id="tag" [style.--mi-color-dinamico]="color" (click)="setColor(todoForm.value.tag!)">
+          @for (item of tagsList; track $index) {
+            <option value={{item.name}} (click)="setColor(item.color)" [ngStyle]="{'background-color': item.color}" >{{ item.name }}</option>
+          }
+        </select>
       }
-      </select>
     </div>
 
     <label for="due_date" class="extra">Due Date: 
-      <button class="selector" (click)="changeValue()" type="button">{{todoForm.controls.due_date.value | date:'fullDate' | date2 }}</button>
+      <button class="selector" (click)="changeValue(1)" type="button">{{todoForm.controls.due_date.value | date:'fullDate' | date2 }}</button>
     </label>
 
     @if(display_selector){ 

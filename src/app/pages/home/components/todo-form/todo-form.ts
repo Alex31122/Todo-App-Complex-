@@ -38,6 +38,7 @@ export class TodoForm implements OnInit{
   todoInfo: ToDo  = new ToDo();
   is_editing: Boolean = false;
   display_selector = false;
+  tag_selector = false;
 
   todoForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -78,8 +79,13 @@ export class TodoForm implements OnInit{
     return todoFormValue;
   }
 
-  changeValue(){
-    this.display_selector = !this.display_selector;
+  changeValue(option: number){
+    if(option == 1){
+      this.display_selector = !this.display_selector;
+    }
+    else{
+      this.tag_selector = !this.tag_selector;
+    }
   }
   setColor(s?: string){
     if(s){

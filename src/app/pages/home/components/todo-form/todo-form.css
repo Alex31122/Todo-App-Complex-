@@ -68,7 +68,12 @@ label{
   font-weight: bold;
   font-size: 11pt;
 }
-
+.tag_selector{
+  margin: auto 0px auto 0px;
+  background-color: var(--mi-color-dinamico);
+  height: 20px;
+  padding: 0px 8px 0px 8px;
+}
 button{
   margin-left: 17px;
   background-color: unset;
