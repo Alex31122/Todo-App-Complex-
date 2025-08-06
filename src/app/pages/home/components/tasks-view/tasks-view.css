@@ -56,8 +56,8 @@ p{
 }
 
 input {
-  height: 24px;
-  width: 24px;
+  /* height: 24px; */
+  /* width: 24px; */
   margin: auto 0px auto 0px;
 }
 
@@ -112,8 +112,8 @@ progress::-moz-progress-bar {
 }
 
 .visual-checkbox {
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   border: 2px solid #aaa;
   border-radius: 4px;
   cursor: pointer;

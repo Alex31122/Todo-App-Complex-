@@ -22,12 +22,12 @@ h2{
 }
 
 .todo-details{
-    width: 256px;
+    max-width: 256px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 97.5%;
-    padding-top: 33%;
+    height: 96.8%;
+    padding-top: 70px;
 }
 
 .extra, .add_sub_task{
@@ -115,6 +115,7 @@ button{
   padding: 4%;
   border-radius: 5px;
   font-size: 11pt;
+  font-weight: bold;
 }
 
 .save-todo{
@@ -126,6 +127,7 @@ button{
   font-size: 11pt;
   margin: 0px;
   padding: 4%;
+  font-weight: bold;
 }
 
 input, textarea{
