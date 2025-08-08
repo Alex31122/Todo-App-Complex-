@@ -9,8 +9,8 @@ import { TagsList } from '../../../pages/home/components/tags-list/tags-list';
 })
 export class Sidebar {
   todoService = inject(TodoService);
-  sendViewSelectionToService(mensaje: string): void {
-    this.todoService.actualizarMensaje(mensaje);
-    this.todoService._selectionObservable.next(mensaje);
+  sendViewSelectionToService(message: string): void {
+    this.todoService.updateCurrentView(message);
+    this.todoService._selectionObservable.next(message);
   }
 }

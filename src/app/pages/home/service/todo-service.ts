@@ -8,35 +8,24 @@ import { Tag } from '../models/tagModel';
 export class TodoService {
   todoList: ToDo[] = [];
   filteredTodoList: ToDo[] = [];
-  holaList: ToDo[] = [];
-  tagsList: Tag[] = [];
+  tagsList: Tag[] = [
+    new Tag({name: "Work", color: "#b1dbfe"}),
+    new Tag({name: "Personal", color: "#fdb1ba"}),
+    new Tag({name: "HouseHold", color: "#bbaeff"}),
+    new Tag({name: "Business", color: "#b3faad"})
+];
   date: Date = new Date();
   dateString: string = this.date.toDateString();
   _selectionObservable = new Subject<string>();
   _editIndexObservable = new Subject<number>();
 
-  private _listaActual = new BehaviorSubject<ToDo[]>([]);
-  public listaActual$: Observable<ToDo[]> = this._listaActual.asObservable();
+  private _currentList = new BehaviorSubject<ToDo[]>([]);
+  public currentList$: Observable<ToDo[]> = this._currentList.asObservable();
+
   constructor() {
-    this.addTagToList("Work", "#b1dbfe");
-    this.addTagToList("Personal", "#fdb1ba");
-    this.addTagToList("HouseHold", "#bbaeff");
-    this.addTagToList("Business", "#b3faad");
     this.fetchTagsList();
     this.fetchTodoList();
-    if(!this.todoList){
-      this.addTagsListToLocalStorage(this.tagsList);
-    }
     this.date.setHours(0, 0 ,0, 0);
-  }
-
-  addTagToList(name: string, color?: string){
-    const tag = new Tag();
-    tag.name = name;
-    if(color){
-      tag.color = color;
-    }
-    this.tagsList.push(tag);
   }
 
   fetchTodoList(){
@@ -48,7 +37,7 @@ export class TodoService {
       this.todoList.map(todo => todo.due_date = new Date(todo.due_date_string));
 
       this.filteredTodoList = this.todoList;
-      this._listaActual.next(this.filteredTodoList);
+      this._currentList.next(this.filteredTodoList);
 
       console.log("To-Do List on local Storage fetched using a service");
       console.log(this.todoList);
@@ -77,46 +66,55 @@ export class TodoService {
     this.tagsList = tagsList;
   }
 
-  actualizarMensaje(nuevoMensaje: string): void {
-    if(nuevoMensaje == 'all-tasks-view'){
-      this.filteredTodoList = this.todoList;
+  updateCurrentView(message: string): void {
+    switch(message){
+      case "all-task-view":
+        this.filteredTodoList = this.todoList;
+        break;
+      case "important-view":
+        this.filteredTodoList = this.todoList.filter(s => s.is_important == true);
+        break;
+      case "this_week":
+        this.filterByThisWeek();
+        break;
+      case "over_due":
+        this.filterByOverDue();
+        break;
+      default:
+        this.filteredTodoList = this.todoList;
     }
-    if(nuevoMensaje == 'important-view'){
-      this.filteredTodoList = this.todoList.filter(s => s.is_important == true);
-    }
-    if(nuevoMensaje == 'over_due'){
-      console.log("YOU SELECTED OVER DUE");
-      this.holaList = [];
-      for (const element of this.todoList) {
-        console.log(element.due_date);
-        console.log(this.date);
-        element.due_date.setHours(0, 0, 0, 0);
-        if(element.due_date.getTime() < this.date.getTime()){
-          this.holaList.push(element);
-        }
-      }
-      // this.filteredTodoList = this.todoList.filter(s => s.due_date.getTime < this.date.getTime);
-      this.filteredTodoList = this.holaList;
-    }
-    if(nuevoMensaje == 'this_week'){
-      console.log("YOU SELECTED THIS WEEK");
-      const today = new Date();
-      const dayOfWeek = today.getDay();
-      let firstDayOfWeek = today;
-      firstDayOfWeek.setDate(today.getDate() - dayOfWeek);
-      let lastDayOfWeek = new Date(firstDayOfWeek);
-      lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 7);
-      this.holaList = [];
-      for (const element of this.todoList) {
-        if(element.due_date.getDate() >= firstDayOfWeek.getDate() && element.due_date.getDate() < lastDayOfWeek.getDate()){
-          this.holaList.push(element);
-        }
-      }
-      this.filteredTodoList = this.holaList;
-      // this.todoList = this.todoList.filter(s => s.due_date.getDate >= firstDayOfWeek.getDate && s.due_date.getDate <= lastDayOfWeek.getDate);
-    }
-    this._listaActual.next(this.filteredTodoList);
-    console.log(`[DataService] Mensaje actualizado a: "${nuevoMensaje}"`);
+    this._currentList.next(this.filteredTodoList);
+    console.log(`[DataService] Message updated to: "${message}"`);
   }
 
+  filterByOverDue(){
+    console.log("YOU SELECTED OVER DUE");
+    let tempList = [];
+    for (const element of this.todoList) {
+      element.due_date.setHours(0, 0, 0, 0);
+      if(element.due_date.getTime() < this.date.getTime()){
+        tempList.push(element);
+      }
+    }
+    // this.filteredTodoList = this.todoList.filter(s => s.due_date.getTime < this.date.getTime);
+    this.filteredTodoList = tempList;
+  }
+
+  filterByThisWeek(){
+    console.log("YOU SELECTED THIS WEEK");
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    let firstDayOfWeek = today;
+    firstDayOfWeek.setDate(today.getDate() - dayOfWeek);
+    let lastDayOfWeek = new Date(firstDayOfWeek);
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 7);
+    let tempList = [];
+    for (const element of this.todoList) {
+      if(element.due_date.getDate() >= firstDayOfWeek.getDate() && element.due_date.getDate() < lastDayOfWeek.getDate()){
+        tempList.push(element);
+      }
+    }
+    this.filteredTodoList = tempList;
+    // this.todoList = this.todoList.filter(s => s.due_date.getDate >= firstDayOfWeek.getDate && s.due_date.getDate <= lastDayOfWeek.getDate);
+  }
 }
