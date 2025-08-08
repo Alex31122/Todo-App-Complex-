@@ -1,8 +1,8 @@
-import { Component, OnInit, NgModule, output, input, inject } from '@angular/core';
+import { Component, OnInit, inject, OnDestroy } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
-import { FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { TodoService } from '../../service/todo-service';
-import { count, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
 
@@ -12,32 +12,29 @@ import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
   templateUrl: './tasks-view.html',
   styleUrl: './tasks-view.css'
 })
-export class TasksView implements OnInit{
+export class TasksView implements OnInit, OnDestroy{
   todoList: ToDo[] = [];
   date: Date = new Date();
   dateString: string = '';
-  private mensajeSubscription: Subscription | undefined;
   countCompleted = 0;
   progressPercentage = 0;
+  private currentListSubscription: Subscription | undefined;
   private todoService = inject(TodoService);
+
   ngOnInit(){
     this.dateString = this.todoService.dateString;
-    console.log("ACTUALL VIEW");
-    this.todoService._selectionObservable.subscribe({
-      next: (data) => {
-        console.log("SELECTION OBSERVABLE DATA");
-        console.log(data);
-      }
-    });
-    this.mensajeSubscription = this.todoService.listaActual$.subscribe(mensaje => {
-      console.log("Message", mensaje);
-      this.todoList = mensaje;
+    this.currentListSubscription = this.todoService.currentList$.subscribe(data => {
+      console.log("Current List: ", data);
+      this.todoList = data;
       this.countCompleted = 0;
       this.todoList.forEach(el => (el.is_completed ? this.countCompleted++ : this.countCompleted += 0))
       this.progressPercentage = Math.round(this.countCompleted * 100 / this.todoList.length);
     });
   }
 
+  ngOnDestroy(): void {
+    this.currentListSubscription?.unsubscribe();
+  }
 
   onCheckboxChange(item: ToDo): void {
     item.is_completed? this.countCompleted++ : this.countCompleted--;

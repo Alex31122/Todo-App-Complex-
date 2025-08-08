@@ -35,12 +35,12 @@
       id="description"
       ></textarea>
     }
-    
-    
+
+
 
     <div class="list">
       <label for="tag" class="extra"> List: </label>
-      <button class="tag_selector" (click)="changeValue(2)" type="button" [style.--mi-color-dinamico]="color">{{todoForm.controls.tag.value}}</button>
+      <button class="tag_selector" (click)="changeSelectorValue(2)" type="button" [style.--mi-color-dinamico]="color">{{todoForm.controls.tag.value}}</button>
       @if (tag_selector) {
         <select formControlName="tag" id="tag" [style.--mi-color-dinamico]="color" (click)="setColor(todoForm.value.tag!)">
           @for (item of tagsList; track $index) {
@@ -50,11 +50,11 @@
       }
     </div>
 
-    <label for="due_date" class="extra">Due Date: 
-      <button class="selector" (click)="changeValue(1)" type="button">{{todoForm.controls.due_date.value | date:'fullDate' | date2 }}</button>
+    <label for="due_date" class="extra">Due Date:
+      <button class="selector" (click)="changeSelectorValue(1)" type="button">{{todoForm.controls.due_date.value | date:'fullDate' | date2 }}</button>
     </label>
 
-    @if(display_selector){ 
+    @if(display_selector){
       <mat-form-field class="extra">
         <input matInput [matDatepicker]="picker" [placeholder]="dateString" formControlName="due_date" id="due_date">
         <mat-hint>MM/DD/YYYY</mat-hint>

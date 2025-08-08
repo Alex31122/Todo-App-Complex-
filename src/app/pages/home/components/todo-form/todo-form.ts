@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
-import { Component, HostAttributeToken, inject, input, OnInit } from '@angular/core';
+import { Component, HostAttributeToken, inject, input, OnDestroy, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todoModel';
 import { TodoService } from '../../service/todo-service';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -10,16 +10,17 @@ import { Tag } from '../../models/tagModel';
 import { NgStyle } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-form',
   imports: [
-    ReactiveFormsModule, 
-    FormsModule, 
-    MatDatepicker, 
-    MatInputModule, 
-    MatNativeDateModule, 
-    MatDatepickerModule, 
+    ReactiveFormsModule,
+    FormsModule,
+    MatDatepicker,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     NgStyle,
     DatePipe,
     DatePipe2
@@ -28,7 +29,7 @@ import { DatePipe2 } from '../../../../shared/pipes/date-pipe';
   styleUrl: './todo-form.css',
   standalone: true,
 })
-export class TodoForm implements OnInit{
+export class TodoForm implements OnInit, OnDestroy{
   todoService = inject(TodoService);
   todoList: ToDo[] = [];
   tagsList: Tag[] = [];
@@ -39,6 +40,7 @@ export class TodoForm implements OnInit{
   is_editing: Boolean = false;
   display_selector = false;
   tag_selector = false;
+  private editIndexSubsription: Subscription| undefined;
 
   todoForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -55,8 +57,8 @@ export class TodoForm implements OnInit{
       this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
       this.is_editing = true;
     }
-    this.todoService._editIndexObservable.subscribe({
-      next: (data) => {      
+    this.editIndexSubsription = this.todoService._editIndexObservable.subscribe({
+      next: (data) => {
         this.todoInfo = this.todoService.todoList.at(data) ?? this.todoInfo;
         this.todoForm.setValue(this.transformTodoToFormValues(this.todoInfo));
         this.is_editing = true;
@@ -66,6 +68,10 @@ export class TodoForm implements OnInit{
     this.setTagsAndTodosList();
     this.color = this.todoService.tagsList.find(s => s.name == "Work")?.color ?? "blue";
     this.dateString = this.todoService.dateString;
+  }
+
+  ngOnDestroy(): void {
+      this.editIndexSubsription?.unsubscribe();
   }
 
   transformTodoToFormValues(todo: ToDo){
@@ -79,7 +85,7 @@ export class TodoForm implements OnInit{
     return todoFormValue;
   }
 
-  changeValue(option: number){
+  changeSelectorValue(option: number){
     if(option == 1){
       this.display_selector = !this.display_selector;
     }
